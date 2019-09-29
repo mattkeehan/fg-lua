@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="mc_organisations">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="450" height="400" />
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="400" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<tooltip field="name" />
+		<sharable />
+		<nodelete />
+		<script>
+			function onInit()
+				onLockChanged();
+				DB.addHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onClose()
+				DB.removeHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onLockChanged()
+				if header.subwindow then
+					header.subwindow.update();
+				end
+				if content.subwindow then
+					content.subwindow.update();
+				end
+			end
+		</script>
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>mc_organisations_header</class>
+			</sub_record_header>
+
+			<frame_record_content name="contentframe" />
+
+			<subwindow_record name="content">
+				<class>mc_organisations_stats</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>content</target>
+			</scrollbar_record>
+			
+			<resize_recordsheet />
+			<close_recordsheet />
+			<helper_mc_organisations />
+		</sheetdata>	
+	</windowclass>
+
+	<windowclass name="mc_organisations_header">
+		<margins control="0,0,0,7" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+				<class>mc_organisations</class>
+			</link_record_header>
+
+			<string_record_name name="name">
+				<anchored>
+					<top offset="5"/>
+					<left offset="37" />
+					<right offset="-30" parent="" />
+				</anchored>
+				<empty textres="mc_organisations_emptyname" />
+			</string_record_name>
+
+			<anchor_record_header_right name="rightanchor" />
+			<icon_record_locked />
+			<button_record_locked />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="mc_organisations_stats">
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				brief_orgtype.setReadOnly(bReadOnly);
+				brief_inlocation.setReadOnly(bReadOnly);
+				brief_description.setReadOnly(bReadOnly);
+				brief_npcs.setReadOnly(bReadOnly);
+				brief_purpose.setReadOnly(bReadOnly);
+				brief_alignment.setReadOnly(bReadOnly);
+				brief_benefits.setReadOnly(bReadOnly);
+				brief_obligations.setReadOnly(bReadOnly);
+				brief_history.setReadOnly(bReadOnly);
+				brief_leader.setReadOnly(bReadOnly);
+				brief_npcs.setReadOnly(bReadOnly);
+				brief_locations.setReadOnly(bReadOnly);
+				brief_images.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column name="label_inlocation">
+				<static textres="ref_label_inlocation" />
+			</label_column>
+			<ft_column_labeled name="brief_inlocation">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+				
+
+			<label_column name="label_briefdesc">
+				<static textres="ref_label_briefdesc" />
+			</label_column>
+			<ft_column_labeled name="brief_description">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			
+			<label_column name="label_orgtype">
+				<static textres="ref_label_orgtype" />
+			</label_column>
+			<ft_column_labeled name="brief_orgtype">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_purpose">
+				<static textres="ref_label_purpose" />
+			</label_column>
+			<ft_column_labeled name="brief_purpose">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_alignment">
+				<static textres="ref_label_alignment" />
+			</label_column>
+			<ft_column_labeled name="brief_alignment">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<line_column />
+
+			<label_column name="label_benefits">
+				<static textres="ref_label_benefits" />
+			</label_column>
+			<ft_column_labeled name="brief_benefits">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_obligations">
+				<static textres="ref_label_obligations" />
+			</label_column>
+			<ft_column_labeled name="brief_obligations">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_history">
+				<static textres="ref_label_history" />
+			</label_column>
+			<ft_column_labeled name="brief_history">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<line_column />
+
+			<label_column name="label_leader">
+				<static textres="ref_label_leader" />
+			</label_column>
+			<ft_column_labeled name="brief_leader">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+						
+			<label_column name="label_npcs">
+				<static textres="ref_label_npcs" />
+			</label_column>
+			<ft_column_labeled name="brief_npcs">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_images">
+				<static textres="ref_label_images" />
+			</label_column>
+			<ft_column_labeled name="brief_images">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_locations">
+				<static textres="ref_label_locations" />
+			</label_column>
+			<ft_column_labeled name="brief_locations">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+
+
+			
+			</sheetdata>
+	</windowclass>
+
+	<windowclass name="masterindexitem_mcorganisations">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/masterindexitem_window.lua" />
+		<sheetdata>
+			<masterindexitem_link name="link" />
+
+			<masterindexitem_anchor_right name="rightanchor" />
+			<masterindexitem_idelete name="idelete" />
+			<masterindexitem_access name="access" />
+			<masterindexitem_modified name="modified" />
+			<masterindexitem_category name="category" />
+			
+			<masterindexitem_name name="name"/>
+ 			<helper_mc_organisations />
+		</sheetdata>
+	</windowclass>
+	
+
+	</root>

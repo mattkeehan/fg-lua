@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+<!-- Client Combat Tracker is far simpler than Host as they dont typically see as much info/detail as the Host. In More Core there is also no Combat Automation so NPC health status etc also wont show up. I recommend that the GM show the Wounds column to Players -->
+
+<root>
+	<windowclass name="combattracker_client">
+		<frame>ctbox</frame>
+		<placement>
+			<size width="500" height="500" />
+		</placement>
+		<sizelimits>
+			<minimum width="400" height="400" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<nodelete />
+		<script>
+			function onInit()
+				OptionsManager.registerCallback("CTSI", updateShowOrder);
+				updateShowOrder();
+			end
+			
+			function onClose()
+				OptionsManager.unregisterCallback("CTSI", updateShowOrder);
+			end
+			
+			function updateShowOrder()
+				local bShowInit = not OptionsManager.isOption("CTSI", "off");
+				label_init.setVisible(bShowInit);
+			end
+		</script>
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>ct_window_title</resource>
+			</windowtitlebar>
+			<anchor_title_ctbox name="contentanchor" />
+
+			<anchor_ctbox_client_header />
+			<anchor_ct_label_right />
+			<label_ct_init name="label_init">
+			<anchored offset="-30,0" />
+			</label_ct_init>
+<!--		<label_ct name="label_init">
+				<anchored to="headeranchor" position="insidetopright" offset="25,0" width="40" />
+				<static textres="ct_label_init" />
+				<script>
+					function onInit()
+						local sMCInit = OptionsManager.getOption("MCInit");
+
+						local sWhereAmI = window.getClass();
+
+						if sMCInit == "Off" then 
+							setVisible(false);
+							end;
+						if sMCInit == "Both" then 
+							setVisible(true);
+							end
+						end
+				</script>
+				<center />
+			</label_ct>   -->
+			<label_ct_name name="label_name" />
+<!--			<label_ct name="label_name">
+				<anchored to="headeranchor" position="insidetopleft" offset="33,0">
+					<right offset="-65" />
+				</anchored>
+				<static textres="ct_label_name" />
+			</label_ct> -->
+
+			<list_ctbox_client />
+			<scrollbar_list />
+			<button_ct_endturn name="turn_complete" />
+			<label_ct_client_rounds />
+			<number_ct_client_rounds />
+			<resize_ctbox />
+			<helper_mc_ct />
+			<close_ctbox />
+
+
+
+			<!-- Added by Damian -->
+<!-- Column5 - Visibiity set by Script below.  -->
+		<stringw name="label_five" source="label.five">
+				<anchored to="label_init" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC5 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- The "sWhereAmI" is to tell me where we are in the DB schema -->
+<!-- There are three possible values for MCC5 - "Off" "GM" "Both" -->
+<!-- There are four possible values for sColumnColour - "Black" "White" -->
+								<script>
+					function onInit()
+			local sColumn5 = OptionsManager.getOption("MCC5");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn5 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn5 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn5 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+		</script>
+		</stringw>
+<!-- Column4 - Visibiity set by Script below.  -->
+		<stringw name="label_four" source="label.four">
+				<anchored to="label_five" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>Column4</default>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC4 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+								<script>
+					function onInit()
+			local sColumn4 = OptionsManager.getOption("MCC4");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn4 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn4 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn4 == "Both" then 
+						setVisible(true);
+						end;
+						end;		
+					</script>
+		</stringw>
+<!-- Column3 - Visibiity set by Script below.  -->
+		<stringw name="label_three" source="label.three">
+				<anchored to="label_four" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC3 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn3 = OptionsManager.getOption("MCC3");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn3 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn3 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn3 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+<!-- Column2 - Visibiity set by Script below.  -->
+		<stringw name="label_two" source="label.two">
+				<anchored to="label_three" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>DEF</default>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC2 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn2 = OptionsManager.getOption("MCC2");
+			local sWhereAmI = window.getClass();
+
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn2 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn2 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn2 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+<!-- Column1 - Visibiity set by Script below.  -->
+		<stringw name="label_one" source="label.one">
+				<anchored to="label_two" width="38" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC1 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn1 = OptionsManager.getOption("MCC1");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn1 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn1 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn1 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+
+		<!-- END Additions by Damian -->
+
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="client_ct_entry">
+		<margins control="0,0,0,2" />
+		<frame>ctentrybox</frame>
+		<script file="ct/scripts/clientct_entry.lua" />
+		<sheetdata>
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+			<hn name="tokenvis" />
+			<hlink name="link" />
+
+			<spacer_ctentry_active_top name="active_spacer_top" />
+<!--			<genericcontrol name="active_spacer_top">
+				<anchored width="0" height="5">
+					<top />
+					<left />
+				</anchored>
+				<invisible />
+			</genericcontrol> -->
+			
+			<button_clientct_active name="active" />
+<!--			<button_ctentry_client_active name="active">
+				<anchored width="33" height="40">
+					<top parent="active_spacer_top" anchor="bottom" />
+					<left />
+				</anchored>
+			</button_ctentry_client_active> -->
+			
+			<token_clientct name="token" />
+<!--			<token_ctentry_client name="token">
+				<anchored width="25" height="25">
+					<top parent="active_spacer_top" anchor="bottom" offset="7" />
+					<left offset="33" />
+				</anchored>
+			</token_ctentry_client> -->
+
+			<button_ctentry_turn name="turn">
+				<anchored to="token" position="belowright" offset="23,-13" />
+<!-- Script looks for an Option called MCTurns and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- There are three possible values for MCTurns - "Off" "GM" "Both" -->
+				<script>
+					function onInit()
+						local sTurnVal = OptionsManager.getOption("MCTurns");
+
+						if sTurnVal == "Off" then 
+						setVisible(false);
+						end;
+						if sTurnVal == "GM" then 
+						setVisible(false);
+						end;
+						if sTurnVal == "Both" then 
+						setVisible(true);
+						end;
+						end;
+				</script>
+			</button_ctentry_turn>
+			
+			<anchor_ctentry_right name="rightanchor" />
+<!--			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top parent="active_spacer_top" anchor="bottom" offset="10" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol> -->
+			<button_ctentry_friendfoe name="friendfoe" />
+<!--			<button_ctentry_friendfoe name="friendfoe">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+			</button_ctentry_friendfoe> -->
+			<number_clientct_init name="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<script>
+					function onInit()
+						local sMCInit = OptionsManager.getOption("MCInit");
+						local sWhereAmI = window.getClass();
+
+
+					if sMCInit == "Off" then 
+							setVisible(false);
+							end;
+						if sMCInit == "Both" then 
+							setVisible(true);
+							window.windowlist.applySort();
+							end
+						end
+					function onValueChanged()
+						window.windowlist.applySort();
+					end
+				</script>
+			</number_clientct_init>
+
+			<string_clientct_name name="name" />
+<!--			<stringu name="name">
+				<anchored height="20">
+					<top parent="active_spacer_top" anchor="bottom" offset="10" />
+					<left parent="token" anchor="right" offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-155" />
+				</anchored>
+				<readonly />
+			</stringu> -->
+			<string_clientct_name name="nonid_name">
+				<empty textres="library_recordtype_empty_nonid_npc" />
+				<invisible />
+			</string_clientct_name>
+
+			<!-- Extra Fields by Damian -->
+
+
+		<number_ct_crosslink name="fieldfive">
+				<anchored to="initresult" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="fieldfour"  next="initresult"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+								<script>
+					function onInit()
+			local sColumn5 = OptionsManager.getOption("MCC5");
+			local sWhereAmI = window.getClass();
+
+				local sC5Colour = OptionsManager.getOption("MCC5C");
+						setColor(sC5Colour);
+
+				
+						if sColumn5 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn5 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn5 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+
+		</script>
+		</number_ct_crosslink>
+
+
+
+			<number_ct_crosslink name="fieldfour">
+				<anchored to="fieldfive" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="fieldthree"  next="fieldfive"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+								<script>
+					function onInit()
+			local sColumn4 = OptionsManager.getOption("MCC4");
+			local sWhereAmI = window.getClass();
+
+				local sC4Colour = OptionsManager.getOption("MCC4C");
+						setColor(sC4Colour);
+
+				
+						if sColumn4 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn4 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn4 == "Both" then 
+						
+						
+						
+						setVisible(true);
+						end;
+						end;
+		</script>
+		</number_ct_crosslink>
+
+			<button_ctentry_health name="nowound">
+				<anchored to="fieldfour">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_ctentry_health>
+
+			<number_ct_crosslink name="fieldthree" source="wounds">
+				<anchored to="fieldfour" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="defence"  next="fieldfour"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+								<script>
+					function update()
+					  local sColumn3 = OptionsManager.getOption("MCC3");
+					  local sWhereAmI = window.getClass();
+					
+					  local sC3Colour = OptionsManager.getOption("MCC3C");
+					  setColor(sC3Colour);
+					
+					
+					  local sSumTotal = OptionsManager.getOption("MCC3SUM");
+					
+					
+					
+					  if sColumn3 == "Off" then 
+					    setVisible(false);
+					  end;
+					  if sColumn3 == "GM" then 
+					    setVisible(false);
+					  end;
+					  if sColumn3 == "Both" then 
+					    setVisible(true);
+					  end;
+					end;
+					function onDrop(x, y, draginfo)
+						local sCurrWounds = getValue();
+					  	local nCurrWounds = tonumber(sCurrWounds);
+						local sNumberWounds = draginfo.getNumberData();
+					  	local nNumberWounds = tonumber(sNumberWounds);
+						local nNewWounds = nCurrWounds + nNumberWounds;
+						setValue(nNewWounds);
+					end;
+
+		</script>
+		</number_ct_crosslink>
+		
+			<number_ct_crosslink name="defence" source="defence">
+				<anchored to="fieldthree" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="health"  next="fieldthree"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+			<script>
+					function onInit()
+			local sColumn2 = OptionsManager.getOption("MCC2");
+			local sWhereAmI = window.getClass();
+
+
+				local sC2Colour = OptionsManager.getOption("MCC2C");
+						setColor(sC2Colour);
+
+				
+						if sColumn2 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn2 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn2 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+		</script>			
+		</number_ct_crosslink>
+			<number_ct_crosslink name="health" source="health">
+				<anchored to="defence" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="name" next="defence"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+			<script>
+					function onInit()
+			local sColumn1 = OptionsManager.getOption("MCC1");
+			local sWhereAmI = window.getClass();
+
+				local sC1Colour = OptionsManager.getOption("MCC1C");
+						setColor(sC1Colour);
+
+				
+						if sColumn1 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn1 == "GM" then 
+						setVisible(false);
+						end;
+						if sColumn1 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+		</script>
+		</number_ct_crosslink>
+
+			<!-- END Extra Fields by Damian -->
+			
+			<!-- Quick labels -->
+			<string_ctentry_targets name="target_summary" />
+			<string_ctentry_effects name="effect_summary" />
+
+			<genericcontrol name="spacer">
+				<anchored width="0" height="7">
+					<top parent="name" anchor="bottom" relation="relative" />
+					<left />
+				</anchored>
+			</genericcontrol>
+
+			<genericcontrol name="active_spacer_bottom">
+				<anchored width="0" height="5">
+					<top parent="name" anchor="bottom" relation="relative" />
+					<left />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+		</sheetdata>
+	</windowclass>
+</root>

@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="spells">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="350" height="400" />
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="400" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<tooltip field="name" />
+		<sharable />
+		<nodelete />
+		<script>
+			function onInit()
+				onLockChanged();
+				DB.addHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onClose()
+				DB.removeHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onLockChanged()
+				if header.subwindow then
+					header.subwindow.update();
+				end
+				if content.subwindow then
+					content.subwindow.update();
+				end
+			end
+		</script>
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>spells_header</class>
+			</sub_record_header>
+
+			<frame_record_content name="contentframe" />
+
+			<subwindow_record name="content">
+				<class>spells_stats</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>content</target>
+			</scrollbar_record>
+			
+			<resize_recordsheet />
+			<close_recordsheet />
+			<helper_mc_spells />
+		</sheetdata>	
+	</windowclass>
+
+	<windowclass name="spells_header">
+		<margins control="0,0,0,7" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+				<class>spells</class>
+			</link_record_header>
+
+			<string_record_name name="name">
+				<anchored>
+					<top offset="5"/>
+					<left offset="37" />
+					<right offset="-60" parent="" />
+				</anchored>
+				<empty textres="spells_emptyname" />
+			</string_record_name>
+
+			<button_rolls_type name="rollstype">
+				<anchored>
+					<top offset="5"/>
+					<right offset="-20" parent="" />
+				</anchored>
+				<script>
+				</script>
+			</button_rolls_type>
+
+			<anchor_record_header_right name="rightanchor" />
+			<icon_record_locked />
+			<button_record_locked />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="spells_stats">
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				description.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column>
+				<static textres="ref_label_command" />
+			</label_column>
+			<string_column name="clichatcommand">
+					<script>
+					function onLoseFocus( )
+				
+						local nameWindowDBNode = window.getDatabaseNode();
+						local nodeWin = nameWindowDBNode;
+						Debug.console("nodeWin: ", nodeWin);
+						local sName = nodeWin.getChild("name").getValue();
+						Debug.console("sName: ", sName);
+						local sCommand = nodeWin.getChild("clichatcommand").getValue();
+						Debug.console("sCommand: ", sCommand);
+						local sRollstype = nodeWin.getChild("rollstype").getValue();
+						Debug.console("sRollstype: ", sRollstype);
+						
+						local nStart,nEnd,sCommand,sParams = string.find(sCommand, '^/([^%s]+)%s*(.*)');
+						Debug.console("sCommand: ", sCommand);
+						if sCommand == "rollon" then
+							nodeWin.getChild("rollstype").setValue("table");
+						elseif sCommand == "mod" then
+							nodeWin.getChild("rollstype").setValue("modifier");
+						elseif sCommand == "damage" then
+							nodeWin.getChild("rollstype").setValue("damage");
+						elseif sCommand == "heal" then
+							nodeWin.getChild("rollstype").setValue("heal");
+						elseif sCommand == "spell" then
+							nodeWin.getChild("rollstype").setValue("spell");
+						elseif sCommand == "cleric" then
+							nodeWin.getChild("rollstype").setValue("cleric");
+						elseif sCommand == "druid" then
+							nodeWin.getChild("rollstype").setValue("druid");
+						elseif sCommand == "bard" then
+							nodeWin.getChild("rollstype").setValue("bard");
+						elseif sCommand == "skull" then
+							nodeWin.getChild("rollstype").setValue("skull");
+						elseif sCommand == "pent" then
+							nodeWin.getChild("rollstype").setValue("pent");
+						elseif sCommand == "fireball" then
+							nodeWin.getChild("rollstype").setValue("fireball");
+						elseif sCommand == "flame" then
+							nodeWin.getChild("rollstype").setValue("flame");
+						elseif sCommand == "wizard" then
+							nodeWin.getChild("rollstype").setValue("wizard");
+						elseif sCommand == nil then
+							nodeWin.getChild("rollstype").setValue("chat");
+						else nodeWin.getChild("rollstype").setValue("rolls");
+						
+						end
+						end
+							
+			</script>
+			</string_column>
+						
+			<line_column />
+			
+			<label_column name="new_spells_lvl">
+				<static textres="new_spells_level" />
+			</label_column>
+			<number_column name="new_spells_level">
+				<default>1</default>
+			</number_column>
+
+			<label_column_right name="new_spells_cst">
+				<anchored to="new_spells_level" />
+				<static textres="new_spells_cost" />
+			</label_column_right>
+			<number_column_right name="new_spells_cost">
+				<anchored to="new_spells_level" />
+				<default>0</default>
+			</number_column_right>
+
+			<line_column name="divider" />
+
+			<ft_columnh name="description">
+				<separator>line_desc</separator>
+			</ft_columnh>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="masterindexitem_spells">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/masterindexitem_window.lua" />
+		<sheetdata>
+			<masterindexitem_link name="link" />
+
+			<masterindexitem_anchor_right name="rightanchor" />
+			<masterindexitem_idelete name="idelete" />
+			<masterindexitem_access name="access" />
+			<masterindexitem_modified name="modified" />
+			<masterindexitem_category name="category" />
+			
+			<masterindexitem_name name="name"/>
+ 			<helper_mc_spells />
+		</sheetdata>
+	</windowclass>
+</root>

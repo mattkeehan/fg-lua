@@ -1,0 +1,9 @@
+diff a/rulesets/MoreCore/campaign/record_char.xml b/rulesets/MoreCore/campaign/record_char.xml	(rejected hunks)
+@@ -107,6 +107,7 @@
+ 						return true;
+ 					end
+ 				</script>
++				<default>7</default>
+ 			</number_pool>
+ 
+ 			<!-- Label Text is found in /strings/strings_morecore.xml -->

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+	<!-- used as column header font in CT -->
+	<font name="smallheadertext">
+		<fgffile name="graphics/fonts/regular-8.fgf" />
+		<color value="#FFFFFF" />
+	</font>
+
+	<font name="list-empty-ps">
+		<fgffile name="graphics/fonts/italic-10.fgf" />
+		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" italic="true" />
+		<color value="#FFFFFF" />
+	</font>
+</root>

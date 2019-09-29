@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+<!-- New WindowClass "charsheet_more" -->
+	<windowclass name="charsheet_more">
+		<script>
+			function onInit()
+				self.onSizeChanged = resizeFrames;
+			end
+
+			function resizeFrames(sourceWindow)
+				local nWidth,_ = getSize();
+				combatframe.setStaticBounds((nWidth/3*2)-15, 45, (nWidth/3)-10, 175)
+				attackframe.setStaticBounds(15, 0, (nWidth*2/3)-30, 215)
+				cas2.setStaticBounds((nWidth/3), 215, (nWidth/3)-15, 240)
+			end
+		</script>
+		<sheetdata>
+
+		<!-- New Frame taken from the record_char_notes.xml file  -->
+			<!-- Ruleset Graphic linked to campaign\template_char.xml -->
+			<frame_rulesetlogo name="logoframe">
+				<bounds>-199,0,170,45</bounds>
+			</frame_rulesetlogo>
+
+<!-- Frame Anchor point and Label -->
+<!-- New Frame for recording Combat Stats - many of which are linked to the CT. -->
+			<!-- Combat Frame by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char name="combatframe">
+				<anchored position="insidetopright" offset="29,45">
+					<left anchor="center" offset="70" />
+					<bottom anchor="top" offset="215" />
+				</anchored>
+			</frame_char>
+<!-- Frame Anchor point and Label -->
+	<string_useredit_bold name="combat_label" source="combat_label">
+				<anchored to="combatframe" />
+				<default>Combat</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+		<!-- This field is linked to Column 1 (health) field in MoreCore CT -->
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+<!-- CombatTracker files are /ct/ct_client.xml and /ct/ct_host.xml -->
+<!-- Script to Link this field to CT field is in /ct/scripts/ct_entry.lua
+     function linkPCFields()
+     specific line is: health.setLink(nodeChar.createChild("health", "number"), true);
+	 -->
+			<number_ctlink name="health" source="health">
+				<anchored to="combatframe" position="insidetopright" offset="15,28" />
+				<tooltip textres="pc_tooltip_health" />
+			</number_ctlink>
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<string_useredit name="pc_label_health">
+				<anchored to="combatframe" position="insidetopleft" offset="10,31" />
+				<default>Health</default>
+				<tooltip textres="label_editable" />
+			</string_useredit>
+
+<!-- This field is linked to Column 2 (defence) field in MoreCore CT -->
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+<!-- CombatTracker files are /ct/ct_client.xml and /ct/ct_host.xml -->
+<!-- Script to Link this field to CT field is in /ct/scripts/ct_entry.lua
+     function linkPCFields()
+     specific line is: health.setLink(nodeChar.createChild("health", "number"), true);
+	 -->
+			<number_ctlink name="defence" source="defence">
+				<anchored to="combatframe" position="insidetopright" offset="15,49" />
+				<tooltip textres="pc_tooltip_defence" />
+			</number_ctlink>
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<string_useredit name="pc_label_defence">
+				<anchored to="combatframe" position="insidetopleft" offset="10,52" />
+				<default>Defence</default>
+				<tooltip textres="label_editable" />
+			</string_useredit>
+
+<!-- This field is linked to Wounds (User Defineable) field in MoreCore CT -->
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+<!-- CombatTracker files are /ct/ct_client.xml and /ct/ct_host.xml -->
+<!-- Script to Link this field to CT field is in /ct/scripts/ct_entry.lua
+     function linkPCFields()
+     specific line is: wounds.setLink(nodeChar.createChild("wounds", "number"), true);-->
+			<number_ctlink name="wounds" source="wounds">
+				<anchored to="combatframe" position="insidetopright" offset="15,70" />
+				<tooltip textres="pc_tooltip_four" />
+			</number_ctlink>
+
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<string_useredit name="pc_label_wounds">
+				<anchored to="combatframe" position="insidetopleft" offset="10,73" />
+				<default>Wounds</default>
+				<tooltip textres="label_editable" />
+			</string_useredit>
+
+<!-- This field is linked to Column 4 (User Defineable) field in MoreCore CT -->
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+<!-- CombatTracker files are /ct/ct_client.xml and /ct/ct_host.xml -->
+<!-- Script to Link this field to CT field is in /ct/scripts/ct_entry.lua
+     function linkPCFields()
+     specific line is: health.setLink(nodeChar.createChild("health", "number"), true);
+	 -->
+			<number_ctlink name="four" source="four">
+				<anchored to="combatframe" position="insidetopright" offset="15,91" />
+				<tooltip textres="pc_tooltip_four" />
+			</number_ctlink>
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<string_useredit name="pc_label_four">
+				<anchored to="combatframe" position="insidetopleft" offset="10,94" />
+				<default>C4</default>
+				<tooltip textres="label_editable" />
+			</string_useredit>
+
+<!-- This field is linked to Column 5 (User Defineable) field in MoreCore CT -->
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+<!-- CombatTracker files are /ct/ct_client.xml and /ct/ct_host.xml -->
+<!-- Script to Link this field to CT field is in /ct/scripts/ct_entry.lua
+     function linkPCFields()
+     specific line is: health.setLink(nodeChar.createChild("health", "number"), true);
+	 -->
+			<number_ctlink name="five" source="five">
+				<anchored to="combatframe" position="insidetopright" offset="15,112" />
+				<tooltip textres="pc_tooltip_five" />
+			</number_ctlink>
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<string_useredit name="pc_label_five">
+				<anchored to="combatframe" position="insidetopleft" offset="10,115" />
+				<default>C5</default>
+				<tooltip textres="label_editable" />
+			</string_useredit>
+
+			<!-- This field is linked to Order field in MoreCore CT -->
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+<!-- CombatTracker files are /ct/ct_client.xml and /ct/ct_host.xml -->
+<!-- Players can roll and update their INIT/Order here - they do not have rights to edit CT direct -->
+			<number_ctlink name="initresult" source="initresult">
+				<anchored to="combatframe" position="insidetopright" offset="35,133" />
+				<tooltip textres="pc_tooltip_order" />
+			</number_ctlink>
+			<number_initbonus name="initbonus" source="initbonus">
+				<anchored to="initresult" position="insidetopright" offset="-22,0" />
+				<tooltip textres="pc_tooltip_order" />
+				<script>
+					function onDoubleClick()
+							local nodeWin = window.getDatabaseNode();
+							local nInitBonus = nodeWin.getChild("initbonus").getValue();
+							ModifierStack.addSlot("Init Bonus", nInitBonus);
+					end
+					</script>
+			</number_initbonus>
+<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<string_useredit name="pc_label_order">
+				<anchored to="combatframe" position="insidetopleft" offset="10,136" />
+				<default>Order</default>
+				<tooltip textres="label_editable" />
+			</string_useredit>
+
+			<!-- End Combat Frame by damned -->
+
+			<!-- New Frame for recording Attack Strings. 5 lines long, will scroll to more than 5 lines but cant double-click them if they go over 5 lines as it loses focus between clicks on lines 6+  -->
+			<!-- Attack Frame by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_attacks name="attackframe">
+				<!--<bounds>15,45,-190,120</bounds>-->
+				<anchored position="insidetopleft" offset="15,0">
+					<right anchor="center" offset="70" />
+					<!--<right parent="combatframe" anchor="left" offset="0" />-->
+					<!--<left anchor="left" offset="15" />-->
+					<bottom anchor="top" offset="215" />
+				</anchored>
+			</frame_char_switch_attacks>
+<!-- Frame Anchor point and Label -->
+<string_useredit_bold name="attack_label" source="attack_label">
+				<anchored to="attackframe" />
+				<default>Attacks</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Blank lines for recording your attack strings  -->
+<!-- My suggestions for attack and damage strings are:
+     Fit Attack and Damage on one line
+     Use Syntax: [A] Weapon Dice, [D] Weapon Dice,
+     You can only use standard dice (d4, d6, d8, d10, d12, d20 and modifiers -->
+			<stringu name="attacks" source="attacks">
+				<anchored to="attackframe">
+					<top offset="25" />
+					<left offset="15" />
+					<right offset="-20" />
+					<bottom offset="-5" />
+				</anchored>
+				<multilinespacing>18</multilinespacing>
+				<!-- npc_attack.lua allows us to introduce the Attacker and Targets names to the Chat Window Result -->
+				<script file="campaign/scripts/npc_attack.lua" />
+			</stringu>
+			<scrollbar_list name="attacks_scrollbar">
+				<anchored to="attacks" />
+				<target>attacks</target>
+			</scrollbar_list>
+			<!-- End Attack Frame by damned -->
+
+
+
+<!-- New Command Line Rolls - reserved for Common Rolls 20160515 -->
+			<!-- PrimaryAttributes Frame2 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_rolls name="cas2">
+				<bounds>175,215,160,240</bounds>
+			</frame_char_switch_rolls>
+		<string_useredit_bold name="cas2_label" source="cas2_label">
+				<anchored to="cas2" />
+				<default>Feats</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+<list_text name="cliroller">
+				<anchored to="cas2">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist2</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<class>trackers</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls name="scroll_2">
+				<anchored to="cas2" />
+				<target>cliroller</target>
+			</scrollbar_rolls>
+
+<!-- New Command Line Rolls - reserved for Common Rolls 20160515 -->
+			<!-- PrimaryAttributes Frame2a by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_rolls name="cas2a">
+				<anchored to="cas2" position="below" offset="0,0">
+					<bottom parent="" anchor="bottom" offset="-1" />
+				</anchored>
+				<!--<bounds>175,435,160,-1</bounds>-->
+			</frame_char_switch_rolls>
+		<string_useredit_bold name="cas2a_label" source="cas2a_label">
+				<anchored to="cas2a" />
+				<default>Powers</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+<list_text name="cliroller2a">
+				<anchored to="cas2a">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist2a</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<class>trackers</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls name="scroll_2a">
+				<anchored to="cas2a" />
+				<target>cliroller2a</target>
+			</scrollbar_rolls>
+
+<!-- New Command Line Rolls - reserved for Common Rolls 20160515 -->
+			<!-- PrimaryAttributes Frame1 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_rolls name="cas1">
+				<anchored to="cas2" position="left" offset="0,0">
+					<left parent="" anchor="left" offset="15" />
+				</anchored>
+				<!--<bounds>15,215,160,220</bounds>-->
+			</frame_char_switch_rolls>
+			<string_useredit_bold name="cas1_label" source="cas1_label">
+				<anchored to="cas1" />
+				<default>Attributes</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+<list_text name="cliroller1">
+				<anchored to="cas1">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist1</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<class>trackers</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls name="scroll_1">
+				<anchored to="cas1" />
+				<target>cliroller1</target>
+			</scrollbar_rolls>
+
+
+
+			<!-- PrimaryAttributes Frame1a by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_rolls name="cas1a">
+				<anchored to="cas1" position="below" offset="0,0">
+					<!-- <left parent="" anchor="left" offset="15" /> -->
+					<bottom parent="" anchor="bottom" offset="-1"/>
+				</anchored>
+<!--				<anchored to="cas2a" position="left" offset="0,0">
+					<left parent="" anchor="left" offset="15" />
+				</anchored>	-->
+				<!--<bounds>15,435,160,-1</bounds>-->
+			</frame_char_switch_rolls>
+		<string_useredit_bold name="cas1a_label" source="cas1a_label">
+				<anchored to="cas1a" />
+				<default>Moves</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+<list_text name="cliroller1a">
+				<anchored to="cas1a">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist1a</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<class>trackers</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls name="scroll_1a">
+				<anchored to="cas1a" />
+				<target>cliroller1a</target>
+			</scrollbar_rolls>
+
+
+<!-- New MC Modifiers - 20160929 -->
+			<!-- Modifiers Frame1 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_rolls name="cas3">
+				<anchored to="cas2" position="right" offset="">
+					<right parent="" anchor="right" offset="-29" />
+					<!--<bottom anchor="center" offset="60" />-->
+				</anchored>
+
+				<!--<bounds>335,215,-29,220</bounds>-->
+			</frame_char_switch_rolls>
+		<string_useredit_bold name="cas3_label" source="cas3_label">
+				<anchored to="cas3" />
+				<default>Skills</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+<list_text name="cliroller3">
+				<anchored to="cas3">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist3</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<class>trackers</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls name="scroll_3">
+				<anchored to="cas3" />
+				<target>cliroller3</target>
+			</scrollbar_rolls>
+
+<!-- New MC Modifiers - 20160929 -->
+			<!-- Modifiers Frame2 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_rolls name="cas3a">
+				<anchored>
+					<top parent="cas2" anchor="bottom" />
+					<left parent="cas2" anchor="right" />
+					<right parent="" anchor="right" offset="-29" />
+					<bottom parent="" anchor="bottom" offset="-1" />
+				</anchored>
+<!--				<anchored to="cas2a" position="right" offset="">
+					<right parent="" anchor="right" offset="-29" />
+					<!{1}**<bottom anchor="center" offset="60" />**{1}>
+				</anchored>	-->
+				<!--<bounds>335,435,-29,-1</bounds>-->
+			</frame_char_switch_rolls>
+		<string_useredit_bold name="cas3a_label" source="cas3a_label">
+				<anchored to="cas3a" />
+				<default>Focuses</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+<list_text name="cliroller3a">
+				<anchored to="cas3a">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist3a</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<class>trackers</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls name="scroll_3a">
+				<anchored to="cas3a" />
+				<target>cliroller3a</target>
+			</scrollbar_rolls>
+
+			</sheetdata>
+	</windowclass>
+
+
+
+	<windowclass name="cli_rolls">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<!-- Create Right Anchor -->
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+
+			<!--button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete-->
+
+			<!-- Add Shortcut Button for use with Libraries or to store info -->
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>cas</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+
+			<!-- Create Button Roll function to apply actions and position to the Button -->
+			<button_rolls_type name="rollstype">
+				<anchored to="shortcut" position="lefthigh" width="18" offset="2" height="16">
+					<right parent="shortcut" anchor="left" offset="-1" relation="relative"/>
+				</anchored>
+				<script file="common/scripts/morecore_rolls.lua" />
+			</button_rolls_type>
+
+			<!--
+				Three Parameter Fields for building rolls using a formula rather then hard coding
+				Note: parameter names are tied into the parameter_field.lua script
+				when looking up the hide checkboxes for each parameter.
+			-->
+			<genericcontrol name="paramanchor">
+				<anchored to="rollstype" position="left" width="0">
+					<right parent="rollstype" anchor="left" offset="4"/>
+				</anchored>
+			</genericcontrol>
+
+			<!-- Create Field to hold the Roll Info -->
+			<simplestring name="name">
+				<readonly />
+				<!--anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-60" />
+				</anchored-->
+				<anchored position="insidetopleft" offset="0,0" height="18">
+					<right parent="rightanchor" anchor="left" offset="-18" relation="relative"/>
+				</anchored>
+				<!--multilinespacing>20</multilinespacing-->
+				<script>
+					function onInit()
+						setTooltipText(getValue());
+					end
+					function onValueChanged()
+						setTooltipText(getValue());
+					end
+					function onEnter()
+						return true;
+					end
+					function onDeleteUp()
+						if isReadOnly() then
+							return;
+						end
+					end
+				</script>
+			</simplestring>
+
+			<basicnumberred name="p3">
+				<anchored to="paramanchor" position="left" width="9">
+					<right parent="paramanchor" anchor="left" offset="-7" relation="relative"/>
+				</anchored>
+				<default>0</default>
+				<tooltip><text>Parameter 3</text></tooltip>
+				<tabtarget prev="p2"/>
+				<script file="scripts/parameter_field.lua" />
+			</basicnumberred>
+			<basicnumberred name="p2">
+				<anchored to="paramanchor" position="left" width="9">
+					<right parent="paramanchor" anchor="left" offset="-7" relation="relative"/>
+				</anchored>
+				<default>0</default>
+				<tooltip><text>Parameter 2</text></tooltip>
+				<tabtarget prev="p1" next="p3"/>
+				<script file="scripts/parameter_field.lua" />
+			</basicnumberred>
+			<basicnumberred name="p1">
+				<anchored to="paramanchor" position="left" width="9">
+					<right parent="paramanchor" anchor="left" offset="-7" relation="relative"/>
+				</anchored>
+				<default>0</default>
+				<tooltip><text>Parameter 1</text></tooltip>
+				<tabtarget next="p2"/>
+				<script file="scripts/parameter_field.lua" />
+			</basicnumberred>
+
+			<!-- Trackers -->
+			<number_statbox name="trackersname">
+				<min>0</min>
+				<max>100</max>
+				<anchored to="shortcut" position="left" width="13">
+					<right parent="shortcut" anchor="left" offset="14" relation="relative"/>
+				</anchored>
+				<!--anchored width="16" height="16">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored-->
+				<tabtarget prev="number_trackers" />
+				<droptypes>
+					<type>number</type>
+				</droptypes>
+				<noreset />
+				<delaykeyupdate />
+				<script file="scripts/tracker_field.lua" />
+				<script>
+					function onDoubleClick(x, y)
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+						local nodeWin = window.getDatabaseNode();
+						local sSkillName = nodeWin.getChild("name").getValue();
+						local sTrackersIcon = nodeWin.getChild("trackers_icon").getValue();
+						local nSkillPoints = tonumber(window.getDatabaseNode().getChild("number_trackers").getValue());
+
+						if getValue() > 0 then
+							if Input.isAltPressed() then
+								txt1 = " (no spend)";
+								else
+									txt1 = " ";
+									setValue(getValue()-1);
+								end
+
+						local msg = {icon = sTrackersIcon};
+							msg.text = rActor.sName .. " is using a " .. sSkillName;
+							msg.text = rActor.sName .. " is using " .. sSkillName .. " (" .. getValue() .. " of " .. nSkillPoints .. " remaining)" .. txt1;
+
+							if Input.isShiftPressed() then
+								ModifierStack.addSlot(sSkillName, 1);
+								msg.text = msg.text .. " (mod applied)";
+								end
+
+							Comm.deliverChatMessage(msg);
+						else
+
+						end
+						return true;
+					end
+
+					function onWheel()
+						return true;
+					end
+
+					function onMenuSelection(item)
+						local nodeWin = window.getDatabaseNode();
+						if item == 3 then
+								local nMaxSkill = nodeWin.getChild("number_trackers").getValue();
+								local nOldSkill = nodeWin.getChild("trackersname").getValue();
+								nodeWin.getChild("trackersname").setValue(nMaxSkill);
+								local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+								local sSkillName = nodeWin.getChild("name").getValue();
+									local msg = {icon = "icon_heart"};
+										msg.text = rActor.sName .. " has reset " .. sSkillName .. "\rThe previous value was " .. nOldSkill;
+									Comm.deliverChatMessage(msg);
+						end
+						if item == 4 then
+						local nodeWin2 = window.getDatabaseNode().getParent();
+						local sPath = nodeWin2.getPath();
+								local last1 = string.match(sPath, "%da?$");
+								local sList = window.getDatabaseNode().getParent().getParent().getPath() .. ".cas" .. last1 .. "_label";
+
+							local aAllSkills = nodeWin2.getChildren();
+							for k,w in pairs(aAllSkills) do
+								local nodeWin = w.getPath();
+								local sMaxSkillPath = nodeWin .. ".number_trackers";
+								local nMaxSkill = DB.getValue(sMaxSkillPath);
+								local sCurSkillPath = nodeWin .. ".trackersname";
+								DB.setValue(nodeWin .. ".trackersname", "number", nMaxSkill);
+
+
+							end
+							local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+								local msg = {icon = "icon_heart"};
+								msg.text = rActor.sName .. " has reset all " .. DB.getValue(sList);
+								Comm.deliverChatMessage(msg);
+						end
+					end
+				</script>
+			</number_statbox>
+
+			<number_statbox name="number_trackers">
+				<anchored to="shortcut" position="left" width="13">
+					<right parent="shortcut" anchor="left" offset="-6" relation="relative"/>
+				</anchored>
+				<!--anchored width="16" height="16">
+					<top offset="2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-8" />
+				</anchored-->
+				<tabtarget next="trackersname" />
+				<min>0</min>
+				<max>100</max>
+				<noreset />
+				<nodrag />
+				<delaykeyupdate />
+				<readonly />
+				<script file="scripts/tracker_field.lua" />
+			</number_statbox>
+
+
+
+		</sheetdata>
+	</windowclass>
+
+
+</root>

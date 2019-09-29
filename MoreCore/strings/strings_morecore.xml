@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Combat Tracker -->
+	<string name="ct_label_attack">Attack:</string>
+	<string name="ct_label_rolls">Rolls:</string>
+	<string name="ct_label_label_health">Enter a Short Column Heading here. This is linked to the Health field in Character and NPC sheets.</string>
+	<string name="ct_label_label_defence">Enter a Short Column Heading here. This is linked to the Defence field in Character and NPC sheets.</string>
+	<string name="ct_label_label_description">Enter a Short Column Heading here. Examples might be: Wnds, THAC0, BtH, Speed. Track combatants values in the fields below. There is no auto-sync or auto-calc.</string>
+	<string name="label_heropoints">Enter the name of your Hero Points here - eg Hero Points, Luck Points, Boons.</string>
+	<string name="ct_label_attack_description">Each string should be separated by a comma. You can add both an Attack Die and a Damage Die. You can add multiple attacks/weapons. Example format: Magical Long Sword d20+2, Long Sword Damage 1d10+2</string>
+	<string name="ct_label_rolls_description">Rolls supports many different Dice Roller Strings</string>
+	<string name="option_header_combattracker">MoreCore Options</string>
+	<string name="option_label_MC5C">CT: Additional Columns</string>
+	<string name="option_label_CTCHC">Combat Tracker Column Header Colour</string>
+	<string name="option_val_white">White</string>
+	<string name="option_val_black">Black</string>
+	<string name="option_val_red">Red</string>
+	<string name="option_val_green">Green</string>
+	<string name="option_val_blue">Blue</string>
+	<string name="option_val_MC3C">Three Columns</string>
+	<string name="option_val_MC4C">Four Columns</string>
+	<string name="option_val_MC5C">Five Columns</string>
+	<string name="option_label_MCC1">CT: Column 1 Health (Synced PC/NPC)(Vis)</string>
+	<string name="option_label_MCC1N">CT: Column 1 Name (updates Char Sheet)</string>
+	<string name="option_label_MCC1C">CT: Column 1 Health Colour</string>
+	<string name="option_label_MCC2">CT: Column 2 Defence (Synced PC/NPC)(Vis)</string>
+	<string name="option_label_MCC2C">CT: Column 2 Defence Colour</string>
+	<string name="option_label_MCC3">CT: Column 3 Wounds (Vis)</string>
+	<string name="option_label_MCC3SUM">CT: Column 3 Wounds Auto SUM</string>
+	<string name="option_label_MCC3C">CT: Column 3 Wounds Colour</string>
+	<string name="option_label_MCC4">CT: Column 4 (Vis)</string>
+	<string name="option_label_MCC4C">CT: Column 4 Colour</string>
+	<string name="option_label_MCC5">CT: Column 5 (Vis)</string>
+	<string name="option_label_MCC5C">CT: Column 5 Colour</string>
+	<string name="option_label_MCTurns">CT: Manual Turn Tracker</string>
+	<string name="option_label_MCInit">CT: Initiative</string>
+	<string name="option_label_MCInitDice">CT: Initiative Dice Size</string>
+	<string name="option_label_MCDT">CT: Show Target info on Damage Rolls</string>
+	<string name="option_label_MCHP1">Hero Point Name</string>
+	<string name="option_val_MCC_rerollPC">Reroll PC and NPC</string>
+	<string name="option_label_MCRerollPCInitDice">CT: PC/NPC Reroll Init Options</string>
+	<string name="option_val_MCC_rerollNPC">Reroll NPC Reset PC</string>
+	<string name="option_val_MCC_off">Off</string>
+	<string name="option_val_MCC_d100">d100</string>
+	<string name="option_val_MCC_d20">d20</string>
+	<string name="option_val_MCC_d12">d12</string>
+	<string name="option_val_MCC_2d10">2d10</string>
+	<string name="option_val_MCC_d10">d10</string>
+	<string name="option_val_MCC_d8">d8</string>
+	<string name="option_val_MCC_d6">d6</string>
+	<string name="option_val_MCC_d4">d4</string>
+	<string name="option_val_MCC_d0">d0</string>
+	<string name="option_val_MCCSUM_off">Off</string>
+	<string name="option_val_MCCSUM_on">On</string>
+	<string name="option_val_MCDT_off">Off</string>
+	<string name="option_val_MCDT_on">On</string>
+	<string name="option_val_MCC_gm">GM Only</string>
+	<string name="option_val_MCC_both">GM and Player</string>
+	<string name="npc_label_attack">Attacks</string>
+	<string name="npc_label_defence">Defence</string>
+	<string name="npc_label_initbonus">Init Bonus</string>
+	<string name="npc_label_health">Health</string>
+	<string name="npc_label_specialattack">Special</string>
+	<string name="pc_label_attack">Attacks</string>
+	<string name="pc_label_combat">Combat</string>
+	<string name="pc_label_defence">Defence</string>
+	<string name="label_editable">User Editable.</string>
+	<string name="pc_tooltip_defence">Click to Edit. Defence, AC, etc. Synced to Combat Tracker.</string>
+	<string name="pc_label_health">Health</string>
+	<string name="pc_label_hero">Hero Points</string>
+	<string name="pc_tooltip_health">Click to Edit. Health, HP, etc. Synced to Combat Tracker.</string>
+	<string name="pc_label_order">Order</string>
+	<string name="pc_tooltip_order">Click to Edit or Drag Dice Result onto. Order, Init, etc. Synced to Combat Tracker.</string>
+	<string name="char_label_cliattributes">MoreCore Rolls</string>
+	<string name="char_label_mcmodattributes">MoreCore Mods</string>
+	<string name="ref_label_command">Dice String</string>
+	<string name="ref_label_number">Max Number</string>
+	<string name="ref_label_max24">(max 24)</string>
+	<string name="ref_label_icon">Icon</string>
+	<string name="ref_label_locationtype">Type</string>
+	<string name="ref_label_orgtype">Type</string>
+	<string name="ref_label_briefdesc">Description</string>
+	<string name="ref_label_inlocation">In Location</string>
+	<string name="ref_label_npcs">Major NPCs</string>
+	<string name="ref_label_demographics">Demographics</string>
+	<string name="ref_label_purpose">Purpose</string>
+	<string name="ref_label_languages">Languages</string>
+	<string name="ref_label_alignment">Alignment</string>
+	<string name="ref_label_economy">Economy</string>
+	<string name="ref_label_benefits">Benefits</string>
+	<string name="ref_label_government">Government</string>
+	<string name="ref_label_obligations">Obligations</string>
+	<string name="ref_label_history">History</string>
+	<string name="ref_label_religion">Religion</string>
+	<string name="ref_label_leader">Leader</string>
+	<string name="ref_label_locations">Locations</string>
+	<string name="ref_label_organisations">Organisations</string>
+	<string name="ref_label_images">Images</string>
+	<string name="sidebar_tooltip_cas">Rolls</string>
+	<string name="sidebar_tooltip_spells">Spells</string>
+	<string name="sidebar_tooltip_mc_locations">Locations</string>
+	<string name="sidebar_tooltip_mc_organisations">Organisations</string>
+	<string name="sidebar_tooltip_mcability">Abilities</string>
+	<string name="sidebar_tooltip_mcmod">MoreCore Mods</string>
+	<string name="cas_window_title">MoreCore Rolls</string>	
+	<string name="library_recordtype_label_rolls">Rolls</string>
+	<string name="library_recordtype_label_trackers">Trackers</string>
+	<string name="library_recordtype_label_spells">Spells</string>
+	<string name="library_recordtype_label_mc_locations">MoreCore Locations</string>
+	<string name="library_recordtype_label_mc_organisations">Organisations</string>
+	<string name="library_recordtype_label_ability">Abilities</string>
+	<string name="mcmod_window_title">MoreCore Mods</string>	
+	<string name="label_editable_stats">Enter the header for these rolls - eg Stats, Skills, Attributes.</string>
+	<string name="library_recordtype_label_cas">Rolls</string>
+	<string name="library_recordtype_label_image">Images</string>
+	<string name="library_recordtype_label_mcmod">MoreCore Mods</string>
+	<string name="library_recordtype_empty_cas">&#171; New Roll &#187;</string>
+	<string name="library_recordtype_empty_mcmod">&#171; New Modifier &#187;</string>
+	<string name="cas_emptyname">&#171; New Roll &#187;</string>
+	<string name="mcability_emptyname">&#171; New Ability &#187;</string>
+	<string name="mc_locations_emptyname">&#171; New Location &#187;</string>
+	<string name="mc_organisations_emptyname">&#171; New Organisation &#187;</string>
+ 	<string name="option_val_DDCL_morecore">Die Hard Gaming</string>
+ 	<string name="ct_tooltip_rolls">Rolls</string>
+ 	<string name="char_label_experience">Experience</string>
+ 	<string name="char_label_expneeded">Required</string>
+ 	<string name="char_label_level">Level</string>
+
+	
+ 	<string name="res_icon_academic">Academic</string>
+ 	<string name="res_icon_ankh">Ankh</string>
+ 	<string name="res_icon_cauldron">Cauldron</string>
+ 	<string name="res_icon_clue">Clue</string>
+ 	<string name="res_icon_crystalball">Crystal Ball</string>
+ 	<string name="res_icon_dragon">Dragon</string>
+ 	<string name="res_icon_heart">Heart</string>
+ 	<string name="res_icon_helmet1">Helmet 1</string>
+ 	<string name="res_icon_helmet2">Helmet 2</string>
+ 	<string name="res_icon_interpersonal">Interpersonal</string>
+ 	<string name="res_icon_luck">Luck</string>
+ 	<string name="res_icon_magic">Magic</string>
+ 	<string name="res_icon_potion">Potion</string>
+ 	<string name="res_icon_rune3">Rune 3</string>
+ 	<string name="res_icon_rune4">Rune 4</string>
+ 	<string name="res_icon_sabres">Sabres</string>
+ 	<string name="res_icon_sanity">Sanity</string>
+ 	<string name="res_icon_shield">Shield</string>
+ 	<string name="res_icon_spellbook">Spellbook</string>
+ 	<string name="res_icon_sword">Sword</string>
+ 	<string name="res_icon_swords">Swords</string>
+ 	<string name="res_icon_tools">Tools</string>
+ 	<string name="res_icon_unicorn">Unicorn</string>
+ 	<string name="res_icon_wizard">Wizard</string>
+
+	
+	<string name="new_spells_level">Spell Level</string>
+	<string name="new_spells_cost">Spell Cost</string>
+
+<!-- Ikael contribution for Initiative option -->
+        <string name="option_label_INAD">CT: Initiative Order</string>
+        <string name="option_val_desc">Descending</string>
+        <string name="option_val_asc">Ascending</string>
+
+	<!-- Help Links -->
+ 	<string name="helper_mc">https://www.diehard-gaming.com/mchelp.html</string>
+ 	<string name="helper_mc_charsheet">https://www.diehard-gaming.com/mchelp.html#charsheet</string>
+ 	<string name="helper_mc_rolls">https://www.diehard-gaming.com/mchelp.html#dicestrings</string>
+ 	<string name="helper_mc_parameters">https://www.diehard-gaming.com/mchelp.html#parameters</string>
+ 	<string name="helper_mc_trackers">https://www.diehard-gaming.com/mchelp.html#trackers</string>
+ 	<string name="helper_mc_ct">https://www.diehard-gaming.com/mchelp.html#combat</string>
+ 	<string name="helper_mc_spells">https://www.diehard-gaming.com/mchelp.html#spells</string>
+ 	<string name="helper_mc_abilities">https://www.diehard-gaming.com/mchelp.html#abilities</string>
+ 	<string name="helper_mc_locations">https://www.diehard-gaming.com/mchelp.html#locations</string>
+ 	<string name="helper_mc_organisations">https://www.diehard-gaming.com/mchelp.html#organisations</string>
+ 	<string name="helper_google">https://www.google.com</string>
+		
+	<!-- Party Sheet -->
+	<string name="ps_emptylistother">Add PCs on Order tab to add to party.</string>
+	<string name="ps_emptylistquest">Click button below to add a new quest entry.\nRight click and use menu to award XP.</string>
+	<string name="ps_emptylistenc">Drop completed encounter links here.\nRight click and use menu to award XP.</string>
+
+	<string name="ps_label_name">Name</string>
+	<string name="ps_label_race">Race</string>
+	<string name="ps_label_classlevel">Class &amp; Level</string>
+	<string name="ps_label_abilities">Abilities</string>
+	<string name="ps_label_ac">AC</string>
+	<string name="ps_label_defenses">Defenses</string>
+	<string name="ps_label_perc">Perc</string>
+	<string name="ps_label_senses">Senses</string>
+
+	<string name="ps_label_groupcheck">Ability</string>
+	<string name="ps_label_groupsave">Save</string>
+	<string name="ps_label_groupskill">Skill</string>
+	<string name="ps_label_groupatk">Attack</string>
+	<string name="ps_default_groupability">Strength</string>
+	<string name="ps_message_groupatk">Party Attack</string>
+
+	<string name="ps_tooltip_showrollon">Show Roll Results</string>
+	<string name="ps_tooltip_showrolloff">Hide Roll Results</string>
+
+	<string name="ps_label_party">Party</string>
+	<string name="ps_label_partyentryxp">XP</string>
+	<string name="ps_label_encounters">Encounters</string>
+	<string name="ps_label_quests">Quests</string>
+	<string name="ps_label_xpawarded">Aw?</string>
+	<string name="ps_tooltip_xpawarded">Awarded?</string>
+	<string name="ps_label_xp">XP</string>
+	<string name="ps_label_xpname">Name</string>
+
+	<string name="ps_label_award">Award</string>
+	<string name="ps_menu_awardxp">Award XP</string>
+	<string name="ps_message_xpaward">Awarded XP to the Party.</string>
+	
+	<string name="xp">XP</string>
+	<string name="cr">CR</string>
+	
+	<!-- Combat Tracker CT -->
+ 	<string name="ct_menu_turnreset">Clear Turn Indicator</string>
+ 	<string name="ct_menu_acted">Already Acted</string>
+ 	<string name="ct_menu_noaction">Yet To Act</string>
+ 	<string name="ct_menu_rerollinit">Reroll Initiative</string>
+ 	<string name="ct_menu_zeroinit">Reset Initiative</string>
+
+	<!-- Roll Parameter Config -->
+	<string name="ref_label_formula_enabled">Enable Formula</string>
+	<string name="ref_label_parameter_formula">Param Formula</string>
+	<string name="ref_label_hide">Hide Parameter</string>
+	<string name="ref_label_p1">p1</string>
+	<string name="ref_label_p2">p2</string>
+	<string name="ref_label_p3">p3</string>
+	<string name="ref_label_p4">p4</string>
+	<string name="ref_label_p5">p5</string>
+	
+	<string name="ref_label_p1_tooltip">p1 Name</string>
+	<string name="ref_label_p2_tooltip">p2 Name</string>
+	<string name="ref_label_p3_tooltip">p3 Name</string>	
+	<string name="ref_label_p4_tooltip">p4 Name</string>	
+	<string name="ref_label_p5_tooltip">p5 Name</string>	
+	
+	<string name="ref_label_m1_tooltip">m1 Formula</string>
+	<string name="ref_label_m2_tooltip">m2 Formula</string>
+	<string name="ref_label_m3_tooltip">m3 Formula</string>	
+	<string name="ref_label_m1a_tooltip">m1 Math</string>
+	<string name="ref_label_m2a_tooltip">m2 Math</string>
+	<string name="ref_label_m3a_tooltip">m3 Math</string>	
+	
+	<string name="ref_label_refa">Ref Field A</string>
+	<string name="ref_label_refa_path">Ref Path</string>
+	<string name="ref_label_refb">Ref Field B</string>
+	<string name="ref_label_refb_path">Ref Path</string>
+	<string name="ref_label_refc">Ref Field C</string>
+	<string name="ref_label_refc_path">Ref Path</string>
+
+	<string name="ref_label_tracker_enabled">Enable Tracker</string>
+	
+</root>

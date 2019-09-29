@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ref_math_header">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+			<!-- changed referencemath to math -->
+				<class>math</class>
+			</link_record_header>
+
+			<anchor_record_header_right />
+			<icon_record_locked />
+			<button_record_locked />
+
+			<string_record_name name="name">
+				<empty textres="library_recordtype_empty_math" />
+			</string_record_name>
+			<label_reftype name="reftype">
+				<static textres="ref_type_math" />
+			</label_reftype>	
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="ref_math_stats">
+		<margins control="0,0,0,7" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column_edit name="label_desc">
+				<default textres="ref_label_desc" />
+			</label_column>
+			<number_column_one name="m1input1" />
+			<string_column_oper name="m1oper" />
+			<number_column_one name="m1input2" />
+			<number_column_two name="m1result" />
+			<line_column />
+
+
+			
+		</sheetdata>
+	</windowclass>
+
+</root>

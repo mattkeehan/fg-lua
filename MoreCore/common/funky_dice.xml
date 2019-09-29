@@ -1,0 +1,88 @@
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+<customdie name="d2">
+  <model>dF</model>
+  <menuicon>icond2</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(2);
+    end
+  </script>
+</customdie>
+
+<customdie name="d3">
+  <model>dF</model>
+  <menuicon>icond3</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(3);
+    end
+  </script>
+</customdie>
+
+<customdie name="d5">
+  <model>dF</model>
+  <menuicon>icond5</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(5);
+    end
+  </script>
+</customdie>
+
+<customdie name="d7">
+  <model>dF</model>
+  <menuicon>icond7</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(7);
+    end
+  </script>
+</customdie>
+
+<customdie name="d14">
+  <model>dF</model>
+  <menuicon>icond14</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(14);
+    end
+  </script>
+</customdie>
+
+<customdie name="d16">
+  <model>dF</model>
+  <menuicon>icond16</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(16);
+    end
+  </script>
+</customdie>
+
+<customdie name="d24">
+  <model>dF</model>
+  <menuicon>icond24</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(24);
+    end
+  </script>
+</customdie>
+
+<customdie name="d30">
+  <model>dF</model>
+  <menuicon>icond30</menuicon>
+  <script>
+    function onValue(result)
+      return math.random(30);
+    end
+  </script>
+</customdie>
+
+
+</root>

@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="npc">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="350" height="600" />
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="350" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_npc</minimize>
+		<tooltip field="name" />
+		<nodelete />
+		<script>
+			function onInit()
+				onLockChanged();
+				DB.addHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+
+			function onClose()
+				DB.removeHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+
+			function onLockChanged()
+				if header.subwindow then
+					header.subwindow.update();
+				end
+				if main.subwindow then
+					main.subwindow.update();
+				end
+
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				notes.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>npc_header</class>
+			</sub_record_header>
+
+			<frame_record_content_tabbed name="contentframe" />
+
+			<subwindow_record name="main">
+				<class>npc_main</class>
+			</subwindow_record>
+			<ft_record name="notes">
+				<anchored to="contentframe" position="over" />
+				<empty textres="ft_empty" />
+				<invisible />
+			</ft_record>
+
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+			<scrollbar_record>
+				<target>notes</target>
+			</scrollbar_record>
+
+			<tabs_recordsheet>
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_notes</icon>
+					<subwindow>notes</subwindow>
+				</tab>
+			</tabs_recordsheet>
+
+			<resize_recordsheet />
+			<close_recordsheet />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="npc_header">
+		<margins control="0,0,0,7" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+				token.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+				<class>npc</class>
+			</link_record_header>
+
+			<anchor_record_header_right />
+			<button_activateid>
+				<anchored to="rightanchor" width="23" height="22">
+					<top offset="-2" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_activateid>
+			<tokenfield name="token">
+				<anchored to="rightanchor" width="25" height="25">
+					<top offset="-2" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<empty>token_empty</empty>
+				<script>
+					function onDoubleClick(x, y)
+						CombatManager.openMap(window.getDatabaseNode());
+					end
+				</script>
+			</tokenfield>
+			<icon_record_locked>
+				<anchored>
+					<right offset="-7" />
+				</anchored>
+			</icon_record_locked>
+			<button_record_locked>
+				<anchored>
+					<right offset="-7" />
+				</anchored>
+			</button_record_locked>
+
+			<string_record_name name="name">
+				<anchored>
+					<top offset="5" />
+					<left offset="40" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<empty textres="npc_emptyname" />
+			</string_record_name>
+
+
+			</sheetdata>
+	</windowclass>
+
+	<windowclass name="npc_main">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				update();
+			end
+
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+
+				space.setReadOnly(bReadOnly);
+				reach.setReadOnly(bReadOnly);
+
+				local bSection2 = false;
+				if skills.update(bReadOnly) then bSection2 = true; end;
+				if items.update(bReadOnly) then bSection2 = true; end;
+				if languages.update(bReadOnly) then bSection2 = true; end;
+				divider.setVisible(bSection2);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="space_label">
+				<static textres="npc_label_size" />
+			</label_column>
+			<number_column name="space">
+				<default>1</default>
+			</number_column>
+
+			<label_column_right name="reach_label">
+				<anchored to="space" />
+				<static textres="npc_label_reach" />
+			</label_column_right>
+			<number_column_right name="reach">
+				<anchored to="space" />
+				<default>1</default>
+			</number_column_right>
+
+			<line_column name="divider" />
+
+			<!-- Add Hero Point Editable Label  -->
+			<!-- label_column_useredit is an editable label so the HeroPoints can be renamed to something appropriate to your game system -->
+			<label_column_useredit name="label_npc_heropoints">
+				<default>Hero Point</default>
+				<tooltip textres="label_heropoints" />
+			</label_column_useredit>
+
+			<!-- Generic Benny/Fate/Hero/Luck Points  -->
+			<!-- number_pool is defined in campaign/template_diehard.xml which is part of the HeroPoints extension -->
+			<number_pool_column name="hero">
+			<anchored position="belowleft" offset="0,12" width="32" height="20" />
+				<description>
+					<text>Hero</text>
+				</description>
+			<!-- Script/Function for Using Benny/Fate/Hero/Luck Points  -->
+			<!-- Checks that there is a Hero Point available  -->
+			<!-- Gets the Actors name  -->
+			<!-- Gets the Hero Point name (player editable)  -->
+			<!-- Displays that Actors is using a Hero Point  -->
+			<!-- Decrements the Hero Point pool  -->
+
+			<!-- Comments for script -->
+			<!-- Script runs when the number is greater than 0 and is doubleclicked -->
+			<!-- store the character/actor name as rActor-->
+			<!-- store the database node as nodewin -->
+			<!-- store the heropoints name sHeroType -->
+			<!-- create a message that the rActor is using a sHeroType -->
+			<!-- send the message to chat -->
+			<!-- decrement the HeroPoints by 1 -->
+			<script>
+					function onDoubleClick(x, y)
+						if getValue() > 0 then
+							local rActor = ActorManager.getActor("npc", window.getDatabaseNode());
+							Debug.console("rActor: ");
+							Debug.console(rActor);
+							local nodeWin = window.getDatabaseNode();
+							Debug.console("nodeWin: ");
+							Debug.console(nodeWin);
+							local sHeroType = nodeWin.getChild("label_npc_heropoints").getValue();
+							Debug.console("sHeroType: ");
+							Debug.console(sHeroType);
+							local msg = {font = "msgfont", icon = "villainpoints"};
+							msg.text = rActor.sName .. " is using a " .. sHeroType;
+							Comm.deliverChatMessage(msg);
+							setValue(getValue()-1);
+						end
+						return true;
+					end
+				</script>
+			</number_pool_column>
+
+<!-- Add Defence Label (uses string from /strings/strings_morecore.xml -->
+			<label_column_right name="initbonus_label">
+				<anchored to="hero" />
+				<static textres="npc_label_initbonus" />
+			</label_column_right>
+<!-- Add Number field. Name is "defence". Stored in db.xml as "defence" which means we can access it from the CT on adding this actor to CT -->
+			<number_column_right name="initbonus" >
+				<anchored to="hero" />
+			</number_column_right>			
+
+<!-- Add Health Label (uses string from /strings/strings_morecore.xml -->
+			<label_column name="health_label">
+				<static textres="npc_label_health" />
+			</label_column>
+<!-- Add Number field. Name is "health". Stored in db.xml as "health" which means we can access it from the CT on adding this actor to CT -->
+			<number_column name="health" />
+
+<!-- Add Defence Label (uses string from /strings/strings_morecore.xml -->
+			<label_column_right name="defence_label">
+				<anchored to="health" />
+				<static textres="npc_label_defence" />
+			</label_column_right>
+<!-- Add Number field. Name is "defence". Stored in db.xml as "defence" which means we can access it from the CT on adding this actor to CT -->
+			<number_column_right name="defence" >
+				<anchored to="health" />
+			</number_column_right>
+
+<!-- Add Attack Label (uses string from /strings/strings_morecore.xml -->
+			<label_column name="attack_label">
+				<static textres="npc_label_attack" />
+			</label_column>
+<!-- Add String field. Name is "attacks". Stored in db.xml as "attacks" which means we can access it from the CT on adding this actor to CT -->
+			<string_columnh name="attacks">
+				<nodragselect />
+<!-- Field expands as required -->
+<!-- My suggestions for attack and damage strings are:
+     Use Syntax: [A] Weapon Dice, [D] Weapon Dice,
+     You can only use standard dice (d4, d6, d8, d10, d12, d20 and modifiers -->
+				<script file="campaign/scripts/npc_attack.lua" />
+			</string_columnh>
+
+<!-- Add Special Label (uses string from /strings/strings_morecore.xml -->
+			<label_column name="specialattack_label">
+				<static textres="npc_label_specialattack" />
+			</label_column>
+<!-- Add String field. Descriptive text only -->
+			<string_columnh name="specialattack" />
+
+<!-- Add Skills Label (uses string from /strings/strings_morecore.xml -->
+			<label_column name="skills_label">
+				<static textres="npc_label_skills" />
+			</label_column>
+<!-- Add String field. Name is "skills".  -->
+			<string_columnh name="skills">
+				<nodragselect />
+<!-- Field expands as required -->
+<!-- My suggestions for skill strings are:
+     Use Syntax: [S] Skill [Target] Dice,
+	 EG: [S] PickPockets [13] d20+1,
+     You can only use standard dice (d4, d6, d8, d10, d12, d20 and modifiers -->
+				<script file="campaign/scripts/npc_attack.lua" />
+			</string_columnh>
+
+			<label_column name="items_label">
+				<static textres="npc_label_items" />
+			</label_column>
+			<string_columnh name="items" />
+
+			<label_column name="languages_label">
+				<static textres="npc_label_languages" />
+			</label_column>
+
+			<string_columnh name="languages" />
+			<frame_char name="cas1">
+				<anchored to="languages" position="belowleft" offset="-100,0" height="200" >
+					<!--<left offset="-100" />-->
+					<right parent="" anchor="center" offset="0" />
+				</anchored>
+			</frame_char>
+		<string_useredit_bold name="cas1_label">
+				<!--<anchored to="cas1" position="insidetopleft" offset="120,14" />-->
+				<anchored to="cas1" position="insidetop" offset="0,14" height="20" />
+				<default>CT Rolls</default>
+				<tooltip textres="label_editable_stats" />
+		</string_useredit_bold>
+		<list_text name="cliroller">
+				<anchored to="cas1" position="insidetopleft" offset="15,35">
+					<right offset="-20" />
+					<bottom offset="-20" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist2</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls_npc>
+				<anchored to="cas1" />
+				<target>cliroller</target>
+			</scrollbar_rolls_npc>
+			
+			<frame_char name="attr1">
+				<anchored to="cas1" position="right" offset="0,0">
+					<right parent="" offset="0" />
+				</anchored>
+			</frame_char>
+			<string_useredit_bold name="attr1_label">
+				<!--<anchored to="cas2" position="insidetopleft" offset="100,14" />-->
+				<anchored to="attr1" position="insidetop" offset="0,14" height="20" />
+				<default>Attributes</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+			<list_text name="attrroller1">
+				<anchored to="attr1" position="insidetopleft" offset="15,35">
+					<right offset="-20" />
+					<bottom offset="-20" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist1</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls_npc>
+				<anchored to="attr1" />
+				<target>attrroller1</target>
+			</scrollbar_rolls_npc>			
+			
+			<frame_char name="cas2">
+				<anchored to="cas1" position="belowleft" offset="0,0">
+					<right parent="" anchor="center" offset="0" />
+					<bottom parent="" offset="0" />
+				</anchored>
+			</frame_char>
+			<string_useredit_bold name="cas2_label">
+				<!--<anchored to="cas2" position="insidetopleft" offset="100,14" />-->
+				<anchored to="cas2" position="insidetop" offset="0,14" height="20" />
+				<default>Other Rolls</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+			<list_text name="cliroller2">
+				<anchored to="cas2" position="insidetopleft" offset="15,35">
+					<right offset="-20" />
+					<bottom offset="-20" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist3</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls_npc>
+				<anchored to="cas2" />
+				<target>cliroller2</target>
+			</scrollbar_rolls_npc>
+			
+			<frame_char name="cas3">
+				<anchored to="cas2" position="right" offset="0,0">
+					<right parent="" offset="0" />
+					<!--<bottom parent="" offset="0" />-->
+				</anchored>				
+			</frame_char>
+			<string_useredit_bold name="cas3_label">
+				<!--<anchored to="cas3" position="insidetopleft" offset="100,14" />-->
+				<anchored to="cas3" position="insidetop" offset="0,14" height="20" />
+				<default>Other Rolls</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+			<list_text name="cliroller3">
+				<anchored to="cas3" position="insidetopleft" offset="15,35">
+					<right offset="-20" />
+					<bottom offset="-20" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist4</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_rolls_npc>
+				<anchored to="cas3" />
+				<target>cliroller3</target>
+			</scrollbar_rolls_npc>			
+			
+			</sheetdata>
+	</windowclass>
+</root>

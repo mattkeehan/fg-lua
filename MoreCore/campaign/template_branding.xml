@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+				<!-- Template to define Ruleset Logo 170x45px for decoration - defined in graphics\graphics_icons.xml -->
+	<template name="frame_rulesetlogo">
+		<genericcontrol>
+			<icon>rulesetlogo</icon>
+		</genericcontrol>
+	</template>
+
+</root>
+				

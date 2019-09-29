@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root merge="join">
+
+<!-- used in ct_host.xml and ct_client.xml -->
+	<template name="frame_ctbox_host_header_toggles">
+		<frame_ct name="header_toggles">
+			<anchored to="headeranchor" height="35" width="115">
+				<top offset="-9" />
+				<right offset="-13" />
+			</anchored>
+		</frame_ct>
+	</template>
+
+<!-- used in ct_host.xml for monsteratk field -->
+	<template name="string_simple_ct">
+		<stringu />
+	</template>	
+
+<!-- used in ct_host.xml for monsterrolls field -->
+	<template name="icon_ctsection_rolls">
+		<icon_ctsection name="rollsicon">
+			<icon>button_rolls_down</icon>
+		</icon_ctsection>
+	</template>
+
+	<template name="string_ctname">
+		<string_ct>
+			<anchored height="20">
+				<top parent="active_spacer_top" anchor="bottom"  relation="relative" offset="10" />
+				<left parent="token" anchor="right" offset="5" />
+				<right parent="health" anchor="left" relation="relative" offset="-10" />
+			</anchored>
+			<tabtarget next="initresult" />
+			<script file="ct/scripts/ct_name.lua" />
+		</string_ct>
+	</template>
+
+	<template name="label_ctentry_rolls">	
+		<label name="rolls_label">
+			<anchored to="rollsicon" position="righthigh" offset="10,0"/>
+				<static textres="ct_label_rolls" />
+				<tooltip textres="ct_label_rolls_description" />
+		</label>
+	</template>
+
+	<template name="frame_ctsub_rolls">
+		<genericcontrol>
+			<anchored>
+				<left offset="83" />
+				<top offset="-8" />
+				<right offset="-4" />
+				<bottom offset="22" />
+			</anchored>
+			<frame name="ct_subgroupbox" />
+			<disabled />
+		</genericcontrol>
+	</template>
+	
+<!-- no longer used - should be removed -->
+	<template name="mylabel">
+		<simplestring>
+			<frame mergerule="replace" name="fielddark" offset="2,3,2,2" />
+			<anchored height="20" />
+			<font>sheetlabel</font>
+		</simplestring>
+	</template>
+
+	<!-- template for editable column headings using Small (8pt) Font, Underlined, White -->
+	<template name="stringw">
+		<stringfield>
+			<font>smallheadertext</font>
+			<lineoffset default="on" mergerule="replace">2</lineoffset>
+			<color>FFFFFF</color>
+		</stringfield>
+	</template>
+
+	<!-- template for editable column headings using Small (8pt) Font, Underlined, Black -->
+	<template name="stringb">
+		<stringfield>
+			<font>smallheadertext</font>
+			<lineoffset default="on" mergerule="replace">2</lineoffset>
+			<color>000000</color>
+		</stringfield>
+	</template>
+	
+	<template name="button_ctentry_health">
+		<button_iconcycler>
+			<anchored width="12" height="22" />
+			<parameters>
+				<icons>nowound|smallwound|largewound</icons>
+				<values>nowound|smallwound|largewound</values>
+				<tooltips>Healthy|Wounded|Heavily Wounded</tooltips>
+				<defaulttooltip>Wound Status</defaulttooltip>
+				<defaulticon>nowound</defaulticon>
+			</parameters>
+			<gmeditonly />
+		</button_iconcycler>
+	</template>
+	
+	<template name="string_ct_summary_spacing">
+		<stringcontrol>
+			<anchored>
+				<top parent="name" anchor="bottom" relation="relative" offset="17" />
+				<left offset="68" />
+				<right offset="-10" />
+			</anchored>
+			<multilinespacing>16</multilinespacing>
+			<font>sheettext</font>
+			<static />
+			<nodrag />
+			<invisible />
+		</stringcontrol>
+	</template>
+	<template name="string_ctentry_targets">
+		<string_ct_summary_spacing>
+			<script file="ct/scripts/ct_target_summary.lua" />
+		</string_ct_summary_spacing>
+	</template>
+
+	<template name="button_ctentry_turn">
+		<buttonfield>
+			<anchored width="15" height="15" />
+			<state icon="ct_turn" tooltipres="ct_menu_noaction" />
+			<state icon="ct_noturn" tooltipres="ct_menu_acted" />
+
+		</buttonfield>
+	</template>
+
+	<template name="button_ct_menu">
+		<buttoncontrol>
+			<bounds>26,11,40,20</bounds>
+			<icon normal="button_menu" pressed="button_menu_down" />
+			<tooltip textres="ct_tooltip_menu" />
+			<script file="ct/scripts/ct_menu_mc.lua" />
+		</buttoncontrol>
+	</template>
+
+	<template name="button_ct_clearturns">
+		<buttoncontrol>
+			<anchored width="33" height="26">
+				<bottom offset="-19" />
+				<left parent="contentanchor" offset="65" />
+			</anchored>
+			<icon normal="button_clearturns" pressed="button_clearturns_down" />
+			<tooltip textres="ct_menu_turnreset" />
+			<script>
+				function onInit()
+						local sMCTurns = OptionsManager.getOption("MCTurns");
+						local sWhereAmI = window.getClass();
+
+						if sMCTurns == "Off" then 
+							setVisible(false);
+							end
+						if sMCTurns == "GM" then 
+							setVisible(true);
+							end
+						if sMCTurns == "Both" then 
+							setVisible(true);
+							end
+						end
+
+
+
+						function onButtonPress()
+					for _, vChild in pairs(window.list.getWindows()) do
+						local sTurn = vChild.turn.getValue();
+						vChild.turn.setValue('0');
+					end
+				end
+
+
+						
+			</script>
+		</buttoncontrol>
+	</template>
+
+	<template name="button_ct_zeroinit">
+		<buttoncontrol>
+			<anchored width="33" height="26">
+				<bottom offset="-19" />
+				<left parent="contentanchor" offset="95" />
+			</anchored>
+			<icon normal="button_zeroinit" pressed="button_zeroinit_down" />
+			<tooltip textres="ct_menu_zeroinit" />
+			<script>
+				function onButtonPress()
+					for _, vChild in pairs(window.list.getWindows()) do
+						local sTurn = vChild.initresult.getValue();
+						vChild.initresult.setValue('0');
+					end
+				end
+
+				function onInit()
+						local sMCInit = OptionsManager.getOption("MCInit");
+						local sWhereAmI = window.getClass();
+
+			
+						if sMCInit == "Off" then 
+							setVisible(false);
+							end;
+						if sMCInit == "Both" then 
+							setVisible(true);
+							end
+						end
+
+				</script>
+		</buttoncontrol>
+	</template>
+
+	<template name="button_ct_rerollinit">
+		<buttoncontrol>
+			<anchored width="33" height="26">
+				<bottom offset="-19" />
+				<left parent="contentanchor" offset="125" />
+			</anchored>
+			<icon normal="button_rerollinit" pressed="button_rerollinit_down" />
+			<tooltip textres="ct_menu_rerollinit" />
+			<script >
+			function onButtonPress()
+				CombatManager2.resetInit();
+				end
+
+				function onInit()
+						local sMCInit = OptionsManager.getOption("MCInit");
+						local sWhereAmI = window.getClass();
+
+			
+						if sMCInit == "Off" then 
+							setVisible(false);
+							end;
+						if sMCInit == "Both" then 
+							setVisible(true);
+							end
+						end
+
+			</script>
+		</buttoncontrol>
+	</template>
+
+	<template name="number_clientct_init">
+		<number_ct_static name="initresult">
+			<anchored to="rightanchor" width="30" height="20">
+				<top />
+				<right anchor="left" relation="relative" offset="-15" />
+			</anchored>
+			<script>
+				function onValueChanged()
+						local sMCInit = OptionsManager.getOption("MCInit");
+						local sWhereAmI = window.getClass();
+
+
+						if sMCInit == "Both" then 
+							window.windowlist.applySort();
+							end
+				end
+			</script>
+		</number_ct_static>
+	</template>	
+	</root>

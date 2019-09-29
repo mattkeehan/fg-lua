@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+			<!-- Add Hero Point User Editable Label template  -->
+	<template name="label_column_useredit">
+		<stringfield>
+			<font>sheettext</font>
+			<anchored>
+				<top parent="columnanchor" anchor="bottom" relation="current" offset="7" />
+				<left />
+			</anchored>
+		</stringfield>
+	</template>
+
+			<!-- Add Hero Point Number template  -->
+	<template name="number_pool_column">
+		<basicnumber>
+			<anchored width="40" height="20">
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+				<left offset="97" />
+			</anchored>
+			<tooltip><text>Click to Edit. Double Click to Spend/Use.</text></tooltip>
+		</basicnumber>
+	</template>
+
+	<template name="frame_npc">
+		<genericcontrol>
+			<frame name="fielddark" />
+		</genericcontrol>
+	</template>
+	</root>

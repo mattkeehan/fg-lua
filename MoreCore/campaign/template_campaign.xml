@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+	<template name="number_standard">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit.</text></tooltip>
+			<anchored position="right" offset="15,0" width="32" />
+			</basicnumber>
+	</template>
+
+	<!-- Not currently used? -->
+	<template name="pc_label_column">
+		<label>
+			<anchored>
+				<top />
+				<left parent="" offset="5" />
+			</anchored>
+		</label>
+	</template>
+<!-- Used in record_npc.xml to set up second number column -->
+	<template name="label_column_right">
+		<label>
+			<anchored>
+				<top />
+				<right parent="" offset="-60" />
+			</anchored>
+		</label>
+	</template>
+<!-- Used in record_npc.xml to set up second string/label column -->
+	<template name="string_column">
+		<basicstring>
+			<anchored>
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+				<left offset="97" />
+				<right offset="-5" />
+			</anchored>
+			<multilinespacing>20</multilinespacing>
+		</basicstring>
+	</template>
+	
+<!-- Used in record_char_more.xml for Health/Defence/Order -->
+	<template name="number_score">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Linked to Combat Tracker.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="32" height="20" />
+			</basicnumber>
+	</template>
+<!-- Used in record_char.xml for Hero Points -->
+	<template name="number_pool">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<frame mergerule="replace" name="statbox" offset="4,3,4,3" />
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Double Click to Spend/Use.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="28" height="16" />
+			</basicnumber>
+	</template>
+<!-- Used in record_char.xml for Hero Points -->
+	<template name="spell_pool">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<frame mergerule="replace" name="" offset="4,3,4,3" />
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Double Click to Spend/Use.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="32" height="20" />
+			<font>reference-b</font>
+			</basicnumber>
+	</template>
+
+<!-- Used in record_char.xml for New Spells -->
+	<template name="spell_pool_new">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<frame name="fielddark" offset="4,3,4,3" />
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Double Click to Spend/Use.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="32" height="20" />
+			<font>reference-b</font>
+			</basicnumber>
+	</template>
+	
+<!-- Used in record_char.xml for Hero Points -->
+	<template name="number_npcpool">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<frame mergerule="replace" name="ruby" offset="4,3,4,3" />
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Double Click to Spend/Use.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="32" height="20" />
+			</basicnumber>
+	</template>
+
+	<!-- Used in record_char_more.xml for Combat Tracker Linked items -->
+	<template name="number_ctlink">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<frame mergerule="replace" name="statbox" offset="3,3,3,2" />
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Double Click to Spend/Use.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="28" height="16" />
+			</basicnumber>
+	</template>
+
+	<!-- Used in record_char_more.xml for Combat Tracker Linked items -->
+	<template name="number_initbonus">
+			<!-- basicnumber seems to be another template but I cant find it anywhere - maybe in CoreRPG? -->
+			<basicnumber>
+			<frame mergerule="replace" name="statboxred" offset="3,3,3,2" />
+			<!-- Tooltip - for HoloGnome -->
+			<tooltip><text>Click to Edit. Initiative Bonus.</text></tooltip>
+			<anchored position="belowleft" offset="0,12" width="18" height="16" />
+			</basicnumber>
+	</template>
+	
+<!-- Used in record_char_more.xml for Combat Tracker Linked Wounds -->
+<!-- Not currently active as not worked out two way sync -->
+	<template name="number_charwounds">
+		<number_dropadd>
+			<hideonvalue value="0" />
+			<script>
+
+				function onDrop(x, y, draginfo)
+					if draginfo.getType() == "number" then
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						ActionDamage.applyDamage(nil, rActor, false, "number", draginfo.getDescription(), draginfo.getNumberData());
+					end
+
+					return true;
+				end
+
+				function onValueChanged()
+					window.onHealthChanged();
+				end
+			</script>
+		</number_dropadd>
+	</template>
+	
+	<!-- Template: Defines the label: string_label -->
+	<template name="string_label">
+		<label>
+			<anchored position="lefthigh" width="100" height="20" />
+			<static />
+			<disabled />
+			<tooltip  />
+		</label>
+	</template>
+
+	<template name="string_useredit">
+		<stringfield>
+			<font>sheettext</font>
+		</stringfield>
+	</template>
+	<template name="string_useredit_bold">
+		<stringfield>
+			<font>reference-b</font>
+			<anchored position="insidetop" offset="0,10" />
+			<center />
+		</stringfield>
+	</template>
+	<template name="string_useredit_bold_left">
+		<stringfield>
+			<font>reference-b</font>
+			<anchored position="insidetopleft" offset="25,10" />
+			<center />
+		</stringfield>
+	</template>
+
+	<template name="button_vari_icon">
+		<genericcontrol>
+			<anchored height="20" />
+			<script file="common/scripts/button_vari_icon.lua" />
+		</genericcontrol>
+	</template>
+
+	<template name="button_rolls_type">
+		<button_iconcycler>
+			<anchored width="24" height="24" />
+			<parameters>
+				<icons>rolls|modifier|table|chat|dbdamage|damage|heal|attack|saving|spell|cleric|wizard|druid|bard|rank|skull|pent|fireball|flame|hitos|legend|legenddmg|legendemph|harn|harnskill|traveller|blackcrusade|cypher|pbta|myhand|animal|helmet|bomb|bomborange|dragon|talislanta|dsr|conan|boon|bane|coriolis|vtr|ubiquity|symb|champions|champions-skill|champions-stun|champions-kill|wod|yinyang|successes|sfdice|bfeat|stunt|stuntdmg|ranged|melee|reaction|bsave|bspell|bcleric|btalent|btechnique|rolllow|challenge|dsaatt|dsaatk|dsaskill|dsainit|dsadamage|ave|trolls|torg|torgu|torgbd|pulpinv|pulpgen|vagrant|mamen|maweapon|pnp|tiny|crom|exalted|exalteddmg|kult|unisystem|weg|crit|ad2300|btech|btechu|frag|fragatt|hackm|hackmbs|cod|witcher|witcherattack|witchermonster|masterbook|afmbe|seventh|wrath|wrathe|wrathp|wrathdmg|wrathdmgb|wrathdmgm|arsmagica|myinit|openlegend|openlegend|kilitar|factwelve|earthdawn|srun4|gumshoe|gsdamage|iron|gsattack|spellpoints|damagedr|damagedr4|drwho|ring|damagel5r|weg|mythras</icons>
+				<values>rolls|modifier|table|chat|dbdamage|damage|heal|attack|saving|spell|cleric|wizard|druid|bard|rank|skull|pent|fireball|flame|hitos|legend|legenddmg|legendemph|harn|harnskill|traveller|blackcrusade|cypher|pbta|myhand|animal|helmet|bomb|bomborange|dragon|talislanta|dsr|conan|boon|bane|coriolis|vtr|ubiquity|symb|champions|champions-skill|champions-stun|champions-kill|wod|yinyang|successes|sfdice|bfeat|stunt|stuntdmg|branged|bmelee|breaction|bsave|bspell|bcleric|btalent|btechnique|rolllow|challenge|dsaatt|dsaatk|dsaskill|dsainit|dsadamage|ave|trolls|torg|torgu|torgbd|pulpinv|pulpgen|vagrant|mamen|maweapon|pnp|tiny|crom|exalted|exalteddmg|kult|unisystem|weg|crit|ad2300|btech|btechu|frag|fragatt|hackm|hackmbs|cod|witcher|witcherattack|witchermonster|masterbook|afmbe|seventh|wrath|wrathe|wrathp|wrathdmg|wrathdmgb|wrathdmgm|arsmagica|myinit|oladv_attribute|oldis_attribute|kilitar|factwelve|earthdawn|srun4|gumshoe|gsdamage|iron|gsattack|spellpoints|damagedr|damagedr4|drwho|ring|damagel5r|swd6|mythras</values>
+				<tooltips>Rolls|Modifier|Table|Chat|DbDamage|Damage|Heal|Attack|Saving|Spell|Cleric|Wizard|Druid|Bard|Rank|Skull|Pentagram|Fireball|Flame|Hitos|Legend|LegendDamage|LegendEmphasis|Harn|HarnSkill|Traveller|BlackCrusade|Cypher|PBTA|MyHand|Animal|Helmet|Bomb|ExplodingSuccesses|Dragon|Talislanta|DSR|Conan|Boon|Bane|Coriolis|VtR|Ubiquity|Symbaroum|Champions|ChampionsSkill|ChampionsStun|ChampionsKill|Wod|YinYang|Successes|SFDice|BethicaFeat|StuntDice|StuntDamage|BethicaRanged|BethicaMelee|BethicaReaction|BethicaSave|BethicaSpell|BethicaCleric|BethicaTalent|BethicaTechnique|RollLow|Challenge|DSAAttribute|DSAAttack|DSASkill|DSAInit|DSADamage|Aventure|Trolls|Torg|TorgUnskilled|TorgDamage|Investigative|General|Vagrant|MentalAttack|MAWeapon|ProwlersNParagons|Tiny|ConanDamage|Exalted|ExaltedDamage|Kult|Unisystem|WEGd6|Critical|2300AD|BattleTech|BattleTechUnskilled|FraggedEmpire|FraggedEmpireAttributeModifier|HackMaster|HackMasterBackStab|ChroniclesOfDarkness|Witcher|WitcherAttack|WitcherMonster|MasterBook|AFMBE|7thSea|WrathNGlory|WrathExtra|WrathPsychic|WrathDamage|WrathBrutal|WrathMelta|ArsMagica|Initiative|OpenlegendAttribute|OpenlegendAttribute|Kilitar|factwelve|Earthdawn|Shadowrun4|Gumshoe|GumshoeDamage|Ironsworn|GumshoeAttack|SpellPoints|Damage|Damage|DrWho|L5R|L5RDamage|SWd6Roll|Mythras</tooltips>
+				<defaulttooltip>Roll Type</defaulttooltip>
+				<defaulticon>rolls</defaulticon>
+			</parameters>
+			<readonly />
+		</button_iconcycler>
+	</template>
+	<template name="button_rolls">
+		<button_vari_icon>
+			<anchored width="24" height="24" />
+			<parameters>
+				<icons>rolls|modifier|table|chat|dbdamage|damage|heal|attack|saving|spell|cleric|wizard|druid|bard|rank|skull|pent|fireball|flame|hitos|legend|legenddmg|legendemph|harn|harnskill|traveller|blackcrusade|cypher|pbta|myhand|animal|helmet|bomb|bomborange|dragon|talislanta|dsr|conan|boon|bane|coriolis|vtr|ubiquity|symb|champions|champions-skill|champions-stun|champions-kill|wod|yinyang|successes|sfdice|bfeat|stunt|stuntdmg|ranged|melee|reaction|bsave|bspell|bcleric|btalent|btechnique|rolllow|challenge|dsaatt|dsaatk|dsaskill|dsainit|dsadamage|ave|trolls|torg|torgu|torgbd|pulpinv|pulpgen|vagrant|mamen|maweapon|pnp|tiny|crom|exalted|exalteddmg|kult|unisystem|weg|crit|ad2300|btech|btechu|frag|fragatt|hackm|hackmbs|cod|witcher|witcherattack|witchermonster|masterbook|afmbe|seventh|wrath|wrathe|wrathp|wrathdmg|wrathdmgb|wrathdmgm|arsmagica|myinit|openlegend|openlegend|kilitar|factwelve|earthdawn|srun4|gumshoe|gsdamage|iron|gsattack|spellpoints|damagedr|damagedr4|drwho|ring|damagel5r|weg|mythras</icons>
+				
+				<values>rolls|modifier|table|chat|dbdamage|damage|heal|attack|saving|spell|cleric|wizard|druid|bard|rank|skull|pent|fireball|flame|hitos|legend|legenddmg|legendemph|harn|harnskill|traveller|blackcrusade|cypher|pbta|myhand|animal|helmet|bomb|bomborange|dragon|talislanta|dsr|conan|boon|bane|coriolis|vtr|ubiquity|symb|champions|champions-skill|champions-stun|champions-kill|wod|yinyang|successes|sfdice|bfeat|stunt|stuntdmg|branged|bmelee|breaction|bsave|bspell|bcleric|btalent|btechnique|rolllow|challenge|dsaatt|dsaatk|dsaskill|dsainit|dsadamage|ave|trolls|torg|torgu|torgbd|pulpinv|pulpgen|vagrant|mamen|maweapon|pnp|tiny|crom|exalted|exalteddmg|kult|unisystem|weg|crit|ad2300|btech|btechu|frag|fragatt|hackm|hackmbs|cod|witcher|witcherattack|witchermonster|masterbook|afmbe|seventh|wrath|wrathe|wrathp|wrathdmg|wrathdmgb|wrathdmgm|arsmagica|myinit|oladv_attribute|oldis_attribute|kilitar|factwelve|earthdawn|srun4|gumshoe|gsdamage|iron|gsattack|spellpoints|damagedr|damagedr4|drwho|ring|damagel5r|swd6|mythras</values>
+				<tooltips>Rolls|Modifier|Table|Chat|DbDamage|Damage|Heal|Attack|Saving|Spell|Cleric|Wizard|Druid|Bard|Rank|Skull|Pentagram|Fireball|Flame|Hitos|Legend|LegendDamage|LegendEmphasis|Harn|HarnSkill|Traveller|BlackCrusade|Cypher|PBTA|MyHand|Animal|Helmet|Bomb|ExplodingSuccesses|Dragon|Talislanta|DSR|Conan|Boon|Bane|Coriolis|VtR|Ubiquity|Symbaroum|Champions|ChampionsSkill|ChampionsStun|ChampionsKill|Wod|YinYang|Successes|SFDice|BethicaFeat|StuntDice|StuntDamage|BethicaRanged|BethicaMelee|BethicaReaction|BethicaSave|BethicaSpell|BethicaCleric|BethicaTalent|BethicaTechnique|RollLow|Challenge|dsaAttribute|DSAAttack|DSASkill|DSAInit|DSADamage|Aventure|Trolls|Torg|TorgUnskilled|TorgDamage|Investigative|General|Vagrant|Mental Attack|MAWeapon|ProwlersNParagons|Tiny|ConanDamage|Exalted|ExaltedDamage|Kult|Unisystem|WEGd6|Critical|2300AD|BattleTech|BattleTechUnskilled|FraggedEmpire|FraggedEmpireAttributeModifier|HackMaster|HackMasterBackStab|ChroniclesOfDarkness|Witcher|WitcherAttack|WitcherMonster|MasterBook|AFMBE|7thSea|WrathNGlory|WrathExtra|WrathPsychic|WrathDamage|WrathBrutal|WrathMelta|ArsMagica|Initiative|OpenlegendAttribute|OpenlegendAttribute|Kilitar|factwelve|Earthdawn|Shadowrun4|Gumshoe|GumshoeDamage|Ironsworn|GumshoeAttack|SpellPoints|Damage|Damage|DrWho|L5R|L5RDamage|SWd6Roll|Mythras</tooltips>
+				<defaulttooltip>Roll Type</defaulttooltip>
+				<defaulticon>rolls</defaulticon>
+			</parameters>
+			<readonly />
+		</button_vari_icon>
+	</template>
+	<template name="frame_spell_stats">
+		<genericcontrol>
+			<icon>spell_stats</icon>
+		</genericcontrol>
+	</template>
+
+
+	<template name="frame_spell_points">
+		<genericcontrol>
+			<icon>spell_points</icon>
+		</genericcontrol>
+	</template>
+
+	<template name="statnumber">
+		<number>
+			<droptypes>
+				<type>number</type>
+			</droptypes>
+			<font>defaultnumbercontrol</font>
+		</number>
+	</template>
+
+	<template name="basicstatnumber">
+		<statnumber>
+			<frame mergerule="replace" name="fieldwhite" offset="3,5,3,5" />
+			<stateframe>
+				<keyedit name="fieldfocus" offset="7,5,7,5" />
+				<hover name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+				<drophilight name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+			</stateframe>
+		</statnumber>
+	</template>
+
+	<template name="frame_switch">
+		<genericcontrol>
+			<icon>switch</icon>
+		</genericcontrol>
+	</template>
+
+
+	<template name="frame_char_switch_attacks">
+		<genericcontrol>
+			<frame name="groupbox_attacks" />
+		</genericcontrol>
+	</template>
+
+	<template name="frame_char_switch_spells">
+		<genericcontrol>
+			<frame name="groupbox_spells" />
+		</genericcontrol>
+	</template>
+
+	<template name="frame_char_switch_rolls">
+		<genericcontrol>
+			<frame name="groupbox_rolls" />
+		</genericcontrol>
+	</template>
+
+	<template name="frame_char_switch_ref">
+		<genericcontrol>
+			<frame name="groupbox_ref" />
+		</genericcontrol>
+	</template>
+	
+	<template name="frame_char_switch_pics">
+		<genericcontrol>
+			<frame name="groupbox_pics" />
+		</genericcontrol>
+	</template>
+
+	<template name="frame_char_switch_notes">
+		<genericcontrol>
+			<frame name="groupbox_notes" />
+		</genericcontrol>
+	</template>
+	
+	<template name="frame_char_switch_abilities">
+		<genericcontrol>
+			<frame name="groupbox_abilities" />
+		</genericcontrol>
+	</template>
+	
+	<template name="list_notes">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "note" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+
+	<template name="list_ref">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "referencetext" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+	
+	<template name="list_pics">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "imagewindow" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+	
+	<template name="list_locations">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "mc_locations" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+
+	<template name="list_organisations">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "mc_organisations" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+	
+	<template name="list_npcs">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "npc" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+
+	<template name="list_abilities">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "ability" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+	
+	<template name="list_story">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "encounter" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+
+
+	<template name="label_column_1">
+		<label>
+			<anchored>
+				<top parent="columnanchor" anchor="bottom" relation="current" offset="37" />
+				<left />
+			</anchored>
+		</label>
+	</template>
+	<template name="label_column_right_1">
+		<label>
+			<anchored>
+				<top />
+				<right parent="" offset="-60" />
+			</anchored>
+		</label>
+	</template>
+	
+	<template name="string_column_1">
+		<basicstring>
+			<anchored>
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="37" />
+				<left offset="97" />
+				<right offset="-5" />
+			</anchored>
+			<multilinespacing>20</multilinespacing>
+		</basicstring>
+	</template>
+
+
+	<template name="number_labeled">
+		<basicnumber>
+			<frame mergerule="replace" name="fielddark" offset="4,2,4,2" />
+			<font>sheettext</font>
+			<lineoffset default="on">1</lineoffset>
+			<script>
+				labelwidget = nil;
+			
+				function onInit()
+					if labelres then
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(Interface.getString(labelres[1])));
+					else
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
+					end
+					if labelwidget then
+						local w,h = labelwidget.getSize();
+						labelwidget.setPosition("bottomleft", w/2, h/2-4);
+					end
+				end
+			</script>
+		</basicnumber>
+	</template>
+	
+	<template name="ft_data">
+		<simpleft>
+			<frame mergerule="replace" name="fieldwhitetrans10" offset="7,5,7,5" hidereadonly="true" />
+			<stateframe>
+				<keyedit name="fieldwhitetrans30" offset="7,5,7,5" />
+				<hover name="fieldwhitetrans30" offset="7,5,7,5" hidereadonly="true" />
+				<drophilight name="fieldwhitetrans30" offset="7,5,7,5" hidereadonly="true" />
+			</stateframe>
+		</simpleft>
+	</template>
+
+	<template name="list_tracker">
+		<list_text>
+			<anchored>
+				<top offset="35" />
+				<left offset="15" />
+				<right offset="-15" />
+				<bottom offset="-15" />
+			</anchored>
+			<sortby><control>value</control></sortby>
+			<newfocus>value</newfocus>
+			<script>
+				function onDrop(x, y, draginfo)
+					if draginfo.isType("shortcut") then
+					Debug.console("dragdata: ", draginfo.getShortcutData());
+						if draginfo.getShortcutData() == "imagewindow" then
+							local nodeSource = draginfo.getDatabaseNode();
+							Debug.console("nodeSource", draginfo.getDatabaseNode(), "nodesource", nodeSource);
+							local win = addEntry(true);
+							Debug.console("win: ", win);
+							if win then
+								win.name.setValue(DB.getValue(nodeSource, "name", ""));
+									Debug.console("draginnfo: ", draginfo.getShortcutData());
+								win.shortcut.setValue(draginfo.getShortcutData());
+							end
+						end
+
+						return true;
+					end
+				end
+			</script>
+		</list_text>
+	</template>
+	
+  <template name="DotControl">
+    <genericcontrol>
+      <default mergerule="replace">0</default>
+      <dots mergerule="replace">12</dots>
+      <rowcount mergerule="replace">2</rowcount>
+      <spacing>
+        <horizontal mergerule="replace">10</horizontal>
+        <vertical mergerule="replace">10</vertical>
+      </spacing>
+      <stateicons>
+        <on mergerule="replace">dot_checked</on>
+        <off mergerule="replace">dot_unchecked</off>
+      </stateicons>
+      <script file="scripts/template_dotcontrol.lua" />
+    </genericcontrol>
+  </template>
+
+
+  
+	<template name="button_iconcycler2">
+		<genericcontrol>
+			<anchored height="20" />
+			<script file="common/scripts/button_iconcycler.lua" />
+		</genericcontrol>
+	</template>
+	
+  <template name="button_trackers_cycler">
+		<button_stringcycler name="icon_trackers_cycler">
+			<anchored height="20" />
+			<parameters>
+
+
+				<labelsres>res_icon_academic|res_icon_ankh|res_icon_cauldron|res_icon_clue|res_icon_crystalball|res_icon_dragon|res_icon_heart|res_icon_helmet1|res_icon_helmet2|res_icon_interpersonal|res_icon_luck|res_icon_magic|res_icon_potion|res_icon_rune3|res_icon_rune4|res_icon_sabres|res_icon_sanity|res_icon_shield|res_icon_spellbook|res_icon_sword|res_icon_swords|res_icon_tools|res_icon_unicorn|res_icon_wizard</labelsres>
+				<values>icon_academic|icon_ankh|icon_cauldron|icon_clue|icon_crystalball|icon_dragon|icon_heart|icon_helmet1|icon_helmet2|icon_interpersonal|icon_luck|icon_magic|icon_potion|icon_rune3|icon_rune4|icon_sabres|icon_sanity|icon_shield|icon_spellbook|icon_sword|icon_swords|icon_tools|icon_unicorn|icon_wizard</values>
+
+			</parameters>
+		</button_stringcycler>
+	</template>
+
+	<template name="totnumber">
+		<simplenumber>
+			<frame mergerule="replace" name="bwframe" offset="3,3,3,4" />
+		</simplenumber>
+	</template>
+	<template name="totnumberred">
+		<simplenumber>
+			<frame mergerule="replace" name="redframe" offset="3,3,3,4" />
+		</simplenumber>
+	</template>
+	<template name="totnumbergrn">
+		<simplenumber>
+			<frame mergerule="replace" name="grnframe" offset="3,5,3,2" />
+		</simplenumber>
+	</template>	
+	<template name="totnumberblu">
+		<simplenumber>
+			<frame mergerule="replace" name="bluframe" offset="3,3,3,4" />
+		</simplenumber>
+	</template>	
+
+	<template name="number_statbox">
+		<basicnumber>
+			<frame name="statbox" offset="3,2,3,2" />
+			<delaykeyupdate />
+			<hideonvalue>0</hideonvalue>
+			<nodrag />
+		</basicnumber>
+	</template>
+	
+</root>

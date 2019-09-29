@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="mc_locations">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="450" height="400" />
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="400" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<tooltip field="name" />
+		<sharable />
+		<nodelete />
+		<script>
+			function onInit()
+				onLockChanged();
+				DB.addHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onClose()
+				DB.removeHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onLockChanged()
+				if header.subwindow then
+					header.subwindow.update();
+				end
+				if content.subwindow then
+					content.subwindow.update();
+				end
+			end
+		</script>
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>mc_locations_header</class>
+			</sub_record_header>
+
+			<frame_record_content name="contentframe" />
+
+			<subwindow_record name="content">
+				<class>mc_locations_stats</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>content</target>
+			</scrollbar_record>
+			
+			<resize_recordsheet />
+			<close_recordsheet />
+			<helper_mc_locations />
+		</sheetdata>	
+	</windowclass>
+
+	<windowclass name="mc_locations_header">
+		<margins control="0,0,0,7" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+				<class>mc_locations</class>
+			</link_record_header>
+
+			<string_record_name name="name">
+				<anchored>
+					<top offset="5"/>
+					<left offset="37" />
+					<right offset="-30" parent="" />
+				</anchored>
+				<empty textres="mc_locations_emptyname" />
+			</string_record_name>
+
+			<anchor_record_header_right name="rightanchor" />
+			<icon_record_locked />
+			<button_record_locked />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="mc_locations_stats">
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				brief_locationtype.setReadOnly(bReadOnly);
+				brief_inlocation.setReadOnly(bReadOnly);
+				brief_description.setReadOnly(bReadOnly);
+				brief_npcs.setReadOnly(bReadOnly);
+				brief_demographics.setReadOnly(bReadOnly);
+				brief_languages.setReadOnly(bReadOnly);
+				brief_economy.setReadOnly(bReadOnly);
+				brief_government.setReadOnly(bReadOnly);
+				brief_history.setReadOnly(bReadOnly);
+				brief_religion.setReadOnly(bReadOnly);
+				brief_locations.setReadOnly(bReadOnly);
+				brief_images.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column name="label_inlocation">
+				<static textres="ref_label_inlocation" />
+			</label_column>
+			<ft_column_labeled name="brief_inlocation">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column>
+				<static textres="ref_label_locationtype" />
+			</label_column>
+			<ft_column_labeled name="brief_locationtype">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+		
+			<line_column />
+
+			<label_column name="label_briefdesc">
+				<static textres="ref_label_briefdesc" />
+			</label_column>
+			<ft_column_labeled name="brief_description">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			
+			<label_column name="label_demographics">
+				<static textres="ref_label_demographics" />
+			</label_column>
+			<ft_column_labeled name="brief_demographics">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_languages">
+				<static textres="ref_label_languages" />
+			</label_column>
+			<ft_column_labeled name="brief_languages">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_economy">
+				<static textres="ref_label_economy" />
+			</label_column>
+			<ft_column_labeled name="brief_economy">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_government">
+				<static textres="ref_label_government" />
+			</label_column>
+			<ft_column_labeled name="brief_government">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_history">
+				<static textres="ref_label_history" />
+			</label_column>
+			<ft_column_labeled name="brief_history">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<label_column name="label_religion">
+				<static textres="ref_label_religion" />
+			</label_column>
+			<ft_column_labeled name="brief_religion">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+			<line_column name="divider" />
+
+			<label_column name="label_npcs">
+				<static textres="ref_label_npcs" />
+			</label_column>
+			<ft_column_labeled name="brief_npcs">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+
+			<label_column name="label_images">
+				<static textres="ref_label_images" />
+			</label_column>
+			<ft_column_labeled name="brief_images">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+
+			<label_column name="label_locations">
+				<static textres="ref_label_locations" />
+			</label_column>
+			<ft_column_labeled name="brief_locations">
+				<separator>line_desc</separator>
+			</ft_column_labeled>
+
+
+			
+			</sheetdata>
+	</windowclass>
+
+	<windowclass name="masterindexitem_mclocations">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/masterindexitem_window.lua" />
+		<sheetdata>
+			<masterindexitem_link name="link" />
+
+			<masterindexitem_anchor_right name="rightanchor" />
+			<masterindexitem_idelete name="idelete" />
+			<masterindexitem_access name="access" />
+			<masterindexitem_modified name="modified" />
+			<masterindexitem_category name="category" />
+			
+			<masterindexitem_name name="name"/>
+ 			<helper_mc_locations />
+		</sheetdata>
+	</windowclass>
+	
+
+	<windowclass name="npcslist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>npc</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>		
+	
+	<windowclass name="mclocationslist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>mc_locations</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>		
+	
+</root>

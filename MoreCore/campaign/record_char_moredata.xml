@@ -1,0 +1,1378 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+<!-- New WindowClass "charsheet_moredata" -->
+	<windowclass name="charsheet_moredata">
+		<script>
+			function onInit()
+				self.onSizeChanged = resizeFrames;
+			end
+			
+			function resizeFrames(sourceWindow)
+				local nWidth,_ = getSize();
+				data2.setStaticBounds((nWidth/3), 220, (nWidth/3)-15, 215)				
+				cas5.setStaticBounds((nWidth/3), 0, (nWidth/3)-15, 215)				
+				end
+		</script>
+		<sheetdata>
+
+		
+			<!-- New Spell Frame for recording Spell/Power Slots. -->
+			<!-- Spell Frame by damned -->
+			<frame_char_switch_spells name="cas5" />
+			<string_useredit_bold name="cas5_label" source="cas5_label">
+				<anchored to="cas5" />
+				<default>Powers</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>		
+
+			
+		<list_text name="cliroller5">
+				<anchored to="cas5">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-8" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist5</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+
+			<scrollbar_rolls name="scroll_5">
+				<anchored to="cas5" />
+				<target>cliroller5</target>
+			</scrollbar_rolls>
+			
+			<!-- Frame Co-ordinates  -->
+			<frame_char_switch_spells name="cas4">
+				<anchored to="cas5" position="left" offset="0,0">
+					<left parent="" anchor="left" offset="15" />
+				</anchored>			
+				</frame_char_switch_spells>
+			<string_useredit_bold name="cas4_label" source="cas4_label">
+				<anchored to="cas4" />
+				<default>Spells</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>	
+
+			
+		<list_text name="cliroller4">
+				<anchored to="cas4">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-8" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.clilist4</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>cas</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+
+			<scrollbar_rolls name="scroll_4">
+				<anchored to="cas4" />
+				<target>cliroller4</target>
+			</scrollbar_rolls>
+			
+
+			
+			<!-- New Frame for recording Spell Points. -->
+			<!-- Spell Frame by damned -->
+			<frame_char_switch_spells name="spellpointsframe">
+				<anchored to="cas5" position="right" offset="">
+					<right parent="" anchor="right" offset="-29" />
+					<!--<bottom anchor="center" offset="60" />-->
+				</anchored>				
+			</frame_char_switch_spells>
+			<string_useredit_bold name="spellpointsframe_label" source="spellpointsframe_label">
+				<anchored to="spellpointsframe" />
+				<default>Spell Points</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>	
+			
+			
+			<string_useredit name="pc_label_spells_cur" source="pc_label_spells_cur">
+				<anchored to="spellpointsframe" position="insidetopright" offset="56,165" width="25" />
+				<default>Cur</default>
+				<tooltip textres="tooltip_spells_current" />
+			</string_useredit>
+			<totnumberred name="spells.cur" source="spells.cur" >
+				<anchored to="spellpointsframe" position="insidetopright" offset="56,185" width="25" />
+				<tooltip text="Armor Value" />
+				<script>
+					function onInit()
+						registerMenuItem("Reset", "log", 5);
+					end
+
+					function onMenuSelection(item)
+						local nodeWin = window.getDatabaseNode();
+						if item == 5 then
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.max").getValue());
+						end
+					end
+				</script>
+			</totnumberred>
+
+			<string_useredit name="pc_label_spells_max" source="pc_label_spells_max">
+				<anchored to="spellpointsframe" position="insidetopright" offset="11,166" width="25" />
+				<default>Max</default>
+				<tooltip textres="tooltip_spells_max" />
+			</string_useredit>
+			<totnumberblu name="spells.max" source="spells.max" >
+				<anchored to="spellpointsframe" position="insidetopright" offset="11,185" width="25" />
+				<tooltip text="Armor Value" />
+				<script>
+					function onInit()
+						registerMenuItem("Reset", "log", 5);
+					end
+
+					function onMenuSelection(item)
+						local nodeWin = window.getDatabaseNode();
+						if item == 5 then
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.max").getValue());
+						end
+					end
+				</script>
+				</totnumberblu>
+			
+			<totnumber name="pointscost1" source="pointscost1">
+				<anchored to="spellpointsframe" position="insidetopleft" offset="56,31" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_1_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_1_name" source="spell_slot_1_name">
+					<anchored to="spellpointsframe" position="insidetopleft" offset="10,31"  width="45" />
+					<default>L1 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+
+
+
+			<totnumber name="pointscost2" source="pointscost2">
+				<anchored to="spellpointsframe" position="insidetopright" offset="10,31" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_2_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_2_name" source="spell_slot_2_name">
+				<anchored to="spellpointsframe" position="insidetopright" offset="38,31" width="45" />
+					<default>L2 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+		
+
+			<totnumber name="pointscost3" source="pointscost3">
+				<anchored to="spellpointsframe" position="insidetopleft" offset="56,53" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_3_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_3_name" source="spell_slot_3_name">
+					<anchored to="spellpointsframe" position="insidetopleft" offset="10,53"  width="45" />
+					<default>L3 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+
+
+
+			<totnumber name="pointscost4" source="pointscost4">
+				<anchored to="spellpointsframe" position="insidetopright" offset="10,53" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_4_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_4_name" source="spell_slot_4_name">
+				<anchored to="spellpointsframe" position="insidetopright" offset="38,53" width="45" />
+					<default>L4 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+		
+
+			<totnumber name="pointscost5" source="pointscost5">
+				<anchored to="spellpointsframe" position="insidetopleft" offset="56,75" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_5_name").getValue();
+						local msg = {font = "msgfont", icon = "spellicon"};
+						msg.text = rActor.sName .. " is using a " .. sSpellName;
+						Comm.deliverChatMessage(msg);
+						nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_5_name" source="spell_slot_5_name">
+					<anchored to="spellpointsframe" position="insidetopleft" offset="10,75"  width="45" />
+					<default>L5 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+
+
+
+			<totnumber name="pointscost6" source="pointscost6">
+				<anchored to="spellpointsframe" position="insidetopright" offset="10,75" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_6_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_6_name" source="spell_slot_6_name">
+				<anchored to="spellpointsframe" position="insidetopright" offset="38,75" width="45" />
+					<default>L6 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+		
+
+			<totnumber name="pointscost7" source="pointscost7">
+				<anchored to="spellpointsframe" position="insidetopleft" offset="56,97" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_7_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_7_name" source="spell_slot_7_name">
+					<anchored to="spellpointsframe" position="insidetopleft" offset="10,97"  width="45" />
+					<default>L7 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+
+
+
+			<totnumber name="pointscost8" source="pointscost8">
+				<anchored to="spellpointsframe" position="insidetopright" offset="10,97" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_8_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_8_name" source="spell_slot_8_name">
+				<anchored to="spellpointsframe" position="insidetopright" offset="38,97" width="45" />
+					<default>L8 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+		
+
+			<totnumber name="pointscost9" source="pointscost9">
+				<anchored to="spellpointsframe" position="insidetopleft" offset="56,119" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_9_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_9_name" source="spell_slot_9_name">
+					<anchored to="spellpointsframe" position="insidetopleft" offset="10,119"  width="45" />
+					<default>L9 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+
+
+
+			<totnumber name="pointscost10" source="pointscost10">
+				<anchored to="spellpointsframe" position="insidetopright" offset="10,119" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_10_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_10_name" source="spell_slot_10_name">
+				<anchored to="spellpointsframe" position="insidetopright" offset="38,119" width="45" />
+					<default>L10 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+		
+
+			<totnumber name="pointscost11" source="pointscost11">
+				<anchored to="spellpointsframe" position="insidetopleft" offset="56,141" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_11_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_11_name" source="spell_slot_11_name">
+					<anchored to="spellpointsframe" position="insidetopleft" offset="10,141"  width="45" />
+					<default>L11 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+
+
+
+			<totnumber name="pointscost12" source="pointscost12">
+				<anchored to="spellpointsframe" position="insidetopright" offset="10,141" width="25" />
+				<tooltip statictext="Max Value" />
+				<script>
+					function onDoubleClick()
+						local pointcost = getValue();
+						Debug.console("pointcost: ", pointcost);
+						local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+						Debug.console("rActor: ", rActor);
+						local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+						local sSpellName = nodeWin.getChild("spell_slot_12_name").getValue();
+						local curSpells = nodeWin.getChild("spells.cur").getValue();
+						Debug.console("curSpells: ", curSpells);
+						if pointcost > curSpells then 
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " has insufficient power to cast " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+						else
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " is using a " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							nodeWin.getChild("spells.cur").setValue(nodeWin.getChild("spells.cur").getValue() - pointcost);
+						end
+						return true;
+					end
+				</script>
+			</totnumber>
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+			<string_useredit name="spell_slot_12_name" source="spell_slot_12_name">
+				<anchored to="spellpointsframe" position="insidetopright" offset="38,141" width="45" />
+					<default>L12 Spell</default>
+					<tooltip textres="need new textres" />
+			</string_useredit>
+		
+
+<!-- New Command Line Rolls - reserved for Common Rolls 20160515 -->
+			<!-- PrimaryAttributes Frame2 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_abilities name="data2">
+				<bounds>175,215,160,220</bounds>
+			</frame_char_switch_abilities>
+			<string_useredit_bold name="data2_label" source="data2_label">
+				<anchored to="data2" />
+				<default>Data</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+			<ft_data name="data2ft" source="data2ft">
+				<anchored to="data2">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-8" />
+					<bottom offset="-10" />
+				</anchored>
+			</ft_data>
+			<scrollbar_rolls name="scroll2">
+				<anchored to="data2" />
+				<target>data2ft</target>
+			</scrollbar_rolls>
+			
+<!-- New Command Line Rolls - reserved for Common Rolls 20160515 -->
+			<!-- PrimaryAttributes Frame2a by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_notes name="data5">
+				<anchored to="data2" position="below" offset="0,0">
+					<bottom parent="" anchor="bottom" offset="-1" />
+				</anchored>				
+				<!--<bounds>175,435,160,-1</bounds>-->
+			</frame_char_switch_notes>
+			<string_useredit_bold name="data5_label" source="data5_label">
+				<anchored to="data5" />
+				<default>Notes</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+	<list_notes name="refdrop5">
+		<anchored to="data5">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.reflist2a</datasource>
+				<class>noteslist</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_notes>
+			<scrollbar_rolls name="scroll5">
+				<anchored to="data5" />
+				<target>data5ft</target>
+			</scrollbar_rolls>
+
+			
+			
+<!-- New Command Line Rolls - reserved for Common Rolls 20160515 -->
+			<!-- PrimaryAttributes Frame1 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_abilities name="data1">
+				<anchored to="data2" position="left" offset="0,0">
+					<left parent="" anchor="left" offset="15" />
+				</anchored>				
+				<!--<bounds>15,215,160,220</bounds>-->
+			</frame_char_switch_abilities>
+			<string_useredit_bold name="data1_label" source="data1_label">
+				<anchored to="data1" />
+				<default>Data</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+			<ft_data name="data1ft" source="data1ft">
+				<anchored to="data1">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-8" />
+					<bottom offset="-10" />
+				</anchored>
+			</ft_data>
+			<scrollbar_rolls name="scroll1">
+				<anchored to="data1" />
+				<target>data1ft</target>
+			</scrollbar_rolls>
+
+
+
+			<!-- PrimaryAttributes Frame1a by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_ref name="data4">
+				<anchored to="data1" position="below" offset="0,0">
+					<!-- <left parent="" anchor="left" offset="15" /> -->
+					<bottom parent="" anchor="bottom" offset="-1"/>
+				</anchored>				
+			</frame_char_switch_ref>
+			<string_useredit_bold name="data4_label" source="data4_label">
+				<anchored to="data4" />
+				<default>Story</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+	<list_story name="refdrop4">
+		<anchored to="data4">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.reflist1a</datasource>
+				<class>reflist</class>
+				<acceptdrop>
+					<class>referencemanualpage</class>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+
+
+					<field>*</field>
+				</acceptdrop>
+			</list_story>
+			<scrollbar_rolls name="scroll4">
+				<anchored to="data4" />
+				<target>refdrop4</target>
+			</scrollbar_rolls>
+
+			
+<!-- New MC Modifiers - 20160929 -->
+			<!-- Modifiers Frame1 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_abilities name="data3">
+				<anchored to="data2" position="right" offset="">
+					<right parent="" anchor="right" offset="-29" />
+					<!--<bottom anchor="center" offset="60" />-->
+				</anchored>			
+			
+				<!--<bounds>335,215,-29,220</bounds>-->
+			</frame_char_switch_abilities>
+			<string_useredit_bold name="data3_label" source="data3_label">
+				<anchored to="data3" />
+				<default>Data</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+			<ft_data name="data3ft" source="data3ft">
+				<anchored to="data3">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-8" />
+					<bottom offset="-10" />
+				</anchored>
+			</ft_data>
+			<scrollbar_rolls name="scroll3">
+				<anchored to="data3" />
+				<target>data3ft</target>
+			</scrollbar_rolls>    
+
+
+
+			
+<!-- New MC Modifiers - 20160929 -->
+			<!-- Modifiers Frame2 by damned -->
+<!-- Frame Co-ordinates  -->
+			<frame_char_switch_pics name="data6">
+				<anchored>
+					<top parent="data2" anchor="bottom" />
+					<left parent="data2" anchor="right" />
+					<right parent="" anchor="right" offset="-29" />
+					<bottom prent="" anchor="bottom" offset="-1" />-->
+				</anchored>				
+			</frame_char_switch_pics>
+			<string_useredit_bold name="data6_label" source="data6_label">
+				<anchored to="data6" />
+				<default>Images</default>
+				<tooltip textres="label_editable_stats" />
+			</string_useredit_bold>
+<!-- Code for draggable string rolls -->
+	<list_pics name="refdrop6">
+		<anchored to="data6">
+					<left offset="10" />
+					<top offset="30" />
+					<right offset="-4" />
+					<bottom offset="-10" />
+				</anchored>
+				<newfocus>name</newfocus>
+				<datasource>.reflist3a</datasource>
+				<class>picslist</class>
+				<acceptdrop>
+					<class>imagewindow</class>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_pics>
+<!-- End Referencetext -->
+			<scrollbar_rolls name="scroll6">
+				<anchored to="data6" />
+				<target>refdrop6</target>
+			</scrollbar_rolls>
+
+			</sheetdata>
+	</windowclass>
+
+    <windowclass name="list_trackers">
+        <margins control="0,0,0,2" />
+        <sheetdata>
+            <!-- Create Right Anchor -->
+            <genericcontrol name="rightanchor">
+                <anchored height="0" width="0">
+                    <top offset="2" />
+                    <right />
+                </anchored>
+            </genericcontrol>
+
+            <button_idelete name="idelete">
+                <anchored to="rightanchor">
+                    <top />
+                    <right anchor="left" relation="relative" offset="-5" />
+                </anchored>
+            </button_idelete>
+
+            <!-- Add Shortcut Button for use with Libraries or to store info -->
+            <linkfield name="shortcut">
+                <anchored to="rightanchor" width="18" height="18">
+                    <top />
+                    <right anchor="left" relation="relative" offset="-3" />
+                </anchored>
+                <class>trackers</class>
+                <description field="name" />
+                <readonly />
+            </linkfield>
+
+            <!-- Trackers -->
+          <DotControl name="trackersname">
+                <anchored to="shortcut" position="lefthigh" width="60" offset="2" height="20">
+                    <right parent="shortcut" anchor="left" offset="-1" relation="relative"/> 
+                </anchored>
+            <default>0</default>
+                <script file="scripts/template_dotcontrol.lua" />
+                <tooltip textres="label_editable_stats" />
+          </DotControl>
+
+      
+            <!-- Create Field to hold the Roll Info -->
+            <simplestring name="name">
+                <readonly />
+                <anchored position="insidetopleft" offset="0,0" height="18">
+                    <right parent="trackersname" anchor="left" offset="0" relation="relative"/> 
+                </anchored>
+                <script>
+                    function onInit()
+                        setTooltipText(getValue());
+                    end
+                    function onValueChanged()
+                        setTooltipText(getValue());
+                    end
+                    function onEnter()
+                        return true;
+                    end
+                    function onDeleteUp()
+                        if isReadOnly() then
+                            return;
+                        end
+                    end
+                </script>
+            </simplestring>
+
+        </sheetdata>
+    </windowclass>
+
+    <windowclass name="list_newtrackers">
+        <margins control="0,0,0,2" />
+        <sheetdata>
+            <!-- Create Right Anchor -->
+            <genericcontrol name="rightanchor">
+                <anchored height="0" width="0">
+                    <top offset="2" />
+                    <right />
+                </anchored>
+            </genericcontrol>
+
+
+            <!-- Add Shortcut Button for use with Libraries or to store info -->
+            <linkfield name="shortcut">
+                <anchored to="rightanchor" width="18" height="18">
+                    <top />
+                    <right anchor="left" relation="relative" offset="-3" />
+                </anchored>
+                <class>trackers</class>
+                <description field="name" />
+                <readonly />
+            </linkfield>
+
+            <!-- Trackers -->
+            <number_statbox name="trackersname">
+                <min>0</min>
+                <max>100</max>
+                <anchored width="16" height="16">
+                    <top offset="2" />
+                    <right parent="rightanchor" anchor="left" relation="relative" offset="-7" />
+                </anchored>
+                <tabtarget prev="number_trackers" />
+                <droptypes>
+                    <type>number</type>
+                </droptypes>
+                <noreset />
+                <delaykeyupdate />
+                
+                <script>
+                    function onDoubleClick(x, y)
+                        local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+                        local nodeWin = window.getDatabaseNode();
+                        local sSkillName = nodeWin.getChild("name").getValue();
+                        local sTrackersIcon = nodeWin.getChild("trackers_icon").getValue();
+                        local nSkillPoints = tonumber(window.getDatabaseNode().getChild("number_trackers").getValue());
+                            
+                        if getValue() > 0 then
+                            if Input.isAltPressed() then
+                                txt1 = " (no spend)";
+                                else
+                                    txt1 = " ";
+                                    setValue(getValue()-1);
+                                end
+
+                        local msg = {icon = sTrackersIcon};
+                            msg.text = rActor.sName .. " is using a " .. sSkillName;
+                            msg.text = rActor.sName .. " is using " .. sSkillName .. " (" .. getValue() .. " of " .. nSkillPoints .. " remaining)" .. txt1;
+
+                            if Input.isShiftPressed() then
+                                ModifierStack.addSlot(sSkillName, 1);
+                                msg.text = msg.text .. " (mod applied)";
+                                end
+
+                            Comm.deliverChatMessage(msg);
+                        else
+                        
+                        end
+                        return true;
+                    end
+                    
+                    function onWheel()
+                        return true;
+                    end
+
+                    function onInit()
+                        registerMenuItem("Reset", "resettemp", 3);
+                        registerMenuItem("reset All", "resetalltemp", 4);
+                    end
+
+                    function onMenuSelection(item)
+                        local nodeWin = window.getDatabaseNode();
+                        if item == 3 then
+                                local nMaxSkill = nodeWin.getChild("number_trackers").getValue();
+                                local nOldSkill = nodeWin.getChild("trackersname").getValue();
+                                nodeWin.getChild("trackersname").setValue(nMaxSkill);
+                                local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+                                local sSkillName = nodeWin.getChild("name").getValue();
+                                    local msg = {icon = "icon_heart"};
+                                        msg.text = rActor.sName .. " has reset " .. sSkillName .. "\rThe previous value was " .. nOldSkill;
+                                    Comm.deliverChatMessage(msg);
+                        end
+                        if item == 4 then
+                        local nodeWin2 = window.getDatabaseNode().getParent();
+                            local aAllSkills = nodeWin2.getChildren();
+                            for k,w in pairs(aAllSkills) do
+                                local nodeWin = w.getPath();
+                                local sMaxSkillPath = nodeWin .. ".number_trackers";
+                                local nMaxSkill = DB.getValue(sMaxSkillPath);
+                                local sCurSkillPath = nodeWin .. ".trackersname";
+                                DB.setValue(nodeWin .. ".trackersname", "number", nMaxSkill);
+
+
+                            end
+                            local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+                                local msg = {icon = "icon_heart"};
+                                msg.text = rActor.sName .. " has reset all Technical Skills";
+                                Comm.deliverChatMessage(msg);
+                        end
+                    end
+                    
+                    </script>    
+            </number_statbox>            
+            
+            <number_statbox name="number_trackers">
+                <anchored width="16" height="16">
+                    <top offset="2" />
+                    <right parent="rightanchor" anchor="left" relation="relative" offset="-11" />
+                </anchored>
+                <tabtarget next="trackersname" />
+                <min>0</min>
+                <max>100</max>
+                <noreset />
+                <nodrag />
+                <delaykeyupdate />
+                <script>
+
+                </script>
+            </number_statbox>
+
+
+            <!-- Create Field to hold the Roll Info -->
+            <simplestring name="name">
+                <readonly />
+                <anchored position="insidetopleft" offset="0,0" height="18">
+                    <right parent="trackersname" anchor="left" offset="0" relation="relative"/> 
+                </anchored>
+                <script>
+                    function onInit()
+                        setTooltipText(getValue());
+                    end
+                    function onValueChanged()
+                        setTooltipText(getValue());
+                    end
+                    function onEnter()
+                        return true;
+                    end
+                    function onDeleteUp()
+                        if isReadOnly() then
+                            return;
+                        end
+                    end
+                </script>
+            </simplestring>
+
+        </sheetdata>
+    </windowclass>
+    
+	
+	<windowclass name="reflist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>referencemanualpage</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>18</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>	
+
+	<windowclass name="imagelist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>imagewindow</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>	
+	
+
+	<windowclass name="noteslist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>note</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>		
+
+	<windowclass name="picslist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>imagewindow</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>		
+
+	
+	<windowclass name="abilitieslist">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>ability</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</simplestring>
+		</sheetdata>
+	</windowclass>		
+	
+
+
+	<windowclass name="spell_rolls">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+
+			<!-- Add Shortcut Button for use with Libraries or to store info -->
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="18" height="18">
+					<top />
+					<right anchor="left" relation="relative" offset="-3" />
+				</anchored>
+				<class>spells</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+
+			<!-- Create Right Anchor -->
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+
+			<!-- Create Field to hold the Roll Info -->
+			<simplestring name="name">
+				<readonly />
+				<anchored position="insidetopleft" offset="0,0" >
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-23" />
+				</anchored>
+				<script>
+					function onInit()
+						setTooltipText(getValue());
+					end
+					function onValueChanged()
+						setTooltipText(getValue());
+					end
+					function onEnter()
+						return true;
+					end
+					function onDeleteUp()
+						if isReadOnly() then
+							return;
+						end
+					end
+				</script>
+			</simplestring>
+
+			<!-- Create Button Roll function to apply actions and position to the Button -->
+			<button_rolls_type name="rollstype">
+				<anchored to="name" position="righthigh" width="22" offset="-2" />
+					<script>
+
+					function onClickDown(x, y)
+							local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+							Debug.console("rActor: ", rActor);
+
+							local nodeWin = window.getDatabaseNode();
+						Debug.console("nodeWin: ", nodeWin);
+
+							local myChar = nodeWin.getParent().getParent();
+							Debug.console("myChar: ", myChar);
+
+						local pointsLeft = nodeWin.getChild("spellslot_1").getValue(); 
+							Debug.console("pointsLeft: ", pointsLeft);
+
+							if pointsLeft > 0 then
+								local sSpellName = nodeWin.getChild("name").getValue();
+								Debug.console("sSpellName: ", sSpellName);
+								local msg = {font = "msgfont", icon = "spellicon"};
+								msg.text = rActor.sName .. " casts " .. sSpellName;
+								Comm.deliverChatMessage(msg);
+								local newPointsLeft = pointsLeft - 1;
+								DB.setValue(nodeWin, "spellslot_1", "number", newPointsLeft );
+								local spellPointCost = nodeWin.getChild("new_spells_cost").getValue();
+								Debug.console("spellPointCost: ", spellPointCost);
+
+								local spellLevel = nodeWin.getChild("new_spells_level").getValue();
+								Debug.console("spellLevel: ", spellLevel);
+
+								local spellMaxLevel = "pointscost" .. spellLevel;
+								Debug.console("spellMaxLevel: ", spellMaxLevel);
+								local spellPointsUsed = "spellpoints_slot_" .. spellLevel;
+								Debug.console("spellPointsUsed: ", spellPointsUsed);
+
+								local spellPointMax = DB.getValue(myChar, spellMaxLevel);
+								Debug.console("spellPointMax: ", spellPointMax);
+								local numSpellPointUsed = DB.getValue(myChar, spellPointsUsed);
+								Debug.console("numSpellPointUsed: ", numSpellPointUsed);
+								
+								if spellPointMax > 0 then 
+									local newSpellPointsUsed = numSpellPointUsed + spellPointCost;
+									DB.setValue(myChar, spellPointsUsed, "number", newSpellPointsUsed ); 
+									else
+								end
+								
+							end
+						return true;
+					end
+
+							</script>
+					</button_rolls_type>
+		
+			<!-- Script/Function for Tracking Spell Usage  -->
+			<!-- spell_pool is defined in campaign/template_campaign.xml  -->
+			<spell_pool_new name="spellslot_1">
+				<anchored to="name" position="righthigh" width="16" offset="-22" />
+				<description>
+					<text>Spell Slot</text>
+				</description>
+			<!-- Script/Function for Tracking Spell Usage  -->
+			<!-- Checks that there is a Spell Slot available  -->
+			<!-- Gets the Actors name  -->
+			<!-- Gets the Spell Slot name (player editable)  -->
+			<!-- Displays that Actors is using a Spell  -->
+			<!-- Decrements the Spell Slot  -->
+				<script>
+					function onDoubleClick(x, y)
+							local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+							Debug.console("rActor: ", rActor);
+
+							local nodeWin = window.getDatabaseNode();
+							Debug.console("nodeWin: ", nodeWin);
+
+							local myChar = nodeWin.getParent().getParent();
+							Debug.console("myChar: ", myChar);
+
+							local pointsLeft = nodeWin.getChild("spellslot_1").getValue(); 
+							Debug.console("pointsLeft: ", pointsLeft);
+							
+						if getValue() > 0 then
+							local rActor = ActorManager.getActor("pc", window.getDatabaseNode().getParent().getParent());
+							Debug.console("rActor: ", rActor);
+							local nodeWin = window.getDatabaseNode();
+							Debug.console("nodeWin: ", nodeWin);
+							local sSpellName = nodeWin.getChild("name").getValue();
+							Debug.console("sSpellName: ", sSpellName);
+							local msg = {font = "msgfont", icon = "spellicon"};
+							msg.text = rActor.sName .. " casts " .. sSpellName;
+							Comm.deliverChatMessage(msg);
+							setValue(getValue()-1);
+
+
+								local spellPointCost = nodeWin.getChild("new_spells_cost").getValue();
+								Debug.console("spellPointCost: ", spellPointCost);
+
+								local spellLevel = nodeWin.getChild("new_spells_level").getValue();
+								Debug.console("spellLevel: ", spellLevel);
+
+								local spellMaxLevel = "pointscost" .. spellLevel;
+								Debug.console("spellMaxLevel: ", spellMaxLevel);
+								local spellPointsUsed = "spellpoints_slot_" .. spellLevel;
+								Debug.console("spellPointsUsed: ", spellPointsUsed);
+
+								local spellPointMax = DB.getValue(myChar, spellMaxLevel);
+								Debug.console("spellPointMax: ", spellPointMax);
+								local numSpellPointUsed = DB.getValue(myChar, spellPointsUsed);
+								Debug.console("numSpellPointUsed: ", numSpellPointUsed);
+								
+								if spellPointMax > 0 then 
+									local newSpellPointsUsed = numSpellPointUsed + spellPointCost;
+									DB.setValue(myChar, spellPointsUsed, "number", newSpellPointsUsed ); 
+									else
+								end							
+						end
+						return true;
+					end
+				</script>
+			</spell_pool_new>
+
+		<basicstatnumber name="spellmax1" source="spellmax1">
+			<frame name="fieldlight" offset="4,3,4,3" />
+				<anchored to="spellslot_1" position="left" offset="5" width="16" />
+				<tooltip statictext="Max Value" />
+			</basicstatnumber>
+
+		<basicstatnumber name="new_spells_cost" source="new_spells_cost">
+			<frame name="fieldlight" offset="4,3,4,3" />
+				<anchored to="spellmax1" position="left" offset="5" width="16" />
+				<tooltip statictext="Spell Point Cost" />
+			</basicstatnumber>
+
+		<basicstatnumber name="new_spells_level" source="new_spells_level">
+			<frame name="fieldlight" offset="4,3,4,3" />
+				<anchored to="new_spells_cost" position="left" offset="5" width="16" />
+				<tooltip statictext="Max Value" />
+			</basicstatnumber>
+			
+
+			</sheetdata>
+	</windowclass>	
+	
+</root>

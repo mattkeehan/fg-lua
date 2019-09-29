@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- MoreCore Radial -->
+		<icon name="icond2" file="graphics/radial/icon_d2.png" />
+		<icon name="icond3" file="graphics/radial/icon_d3.png" />
+		<icon name="icond5" file="graphics/radial/icon_d5.png" />
+		<icon name="icond7" file="graphics/radial/icon_d7.png" />
+		<icon name="icond14" file="graphics/radial/icon_d14.png" />
+		<icon name="icond16" file="graphics/radial/icon_d16.png" />
+		<icon name="icond24" file="graphics/radial/icon_d24.png" />
+		<icon name="icond30" file="graphics/radial/icon_d30.png" />
+
+
+	<!-- Common -->
+	
+	<!-- Sidebar -->
+
+	<!-- Sidebar -->
+	
+	<!-- Buttons -->
+	
+	<!-- Dragging -->
+
+	<!-- Rolls -->
+
+	<!-- Campaign Lists -->
+	
+	<!-- Character Sheet -->
+
+	<!-- Local mode -->
+
+	<!-- Tokens - Health -->
+	
+	<!-- Misc -->
+
+	<!-- Override CoreRPG ruleset graphics -->
+
+	<!-- Dice tower -->
+
+	<!-- Common -->
+
+	<!-- Chat window -->
+
+	<!-- Character list -->
+
+	<!-- Modifier stack -->
+
+	<!-- Token Bag -->
+
+	<!-- Sidebar -->
+
+	<!-- Lighting -->
+	
+	<!-- Campaign lists -->
+	
+	<!-- Minimized -->	
+
+	<!-- Combat tracker -->
+
+</root>

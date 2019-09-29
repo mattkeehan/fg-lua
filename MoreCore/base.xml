@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root version="3.0" release="1.51" logo="logo.png">
+	<!-- Attributes -->
+	<description>
+		<text>MoreCore - Flexible Ruleset for Fantasy Grounds</text>
+		<author>Die Hard Gaming</author>
+		<website>http://diehard-gaming.com</website>
+	</description>
+	<importinfo>
+		<acceptfrom ruleset="MoreCore" />
+		<acceptfrom ruleset="CoreRPG" />
+	</importinfo>
+
+	<!-- Announcements -->
+
+	<!-- MoreCore specific script to display Chat Window Message on startup -->
+	<!-- MoreCore specific Logo displayed in Chat Window on startup -->
+	<icon name="morecorelogo" file="graphics/logos/morecore.png" />
+    <announcement text="MoreCore Ruleset (Version 1.51 20190428). This generic ruleset adds features and flexibility allowing you to play more game systems. \r\nThis ruleset coded by damned and ianmward. Additional thanks to Trenloe, mcortez, superteddy57 and others for their assistance along the way. This incorporates dice rolling extensions from Ikael, DMFirmy, Frostbyte, Sibelius, Trenloe, Imiri, Myrddin, rstrahan, ahoggya, superteddy57, mcortez, David Stitt, thwright, trobadork, SmileyMan, damned and ianmward.\r\nDicePool and much other goodness by ianmward.\r\nRoll Parameters by mcortez.\r\nClick link for User Guide" icon="morecorelogo" font="emotefont" link="http://www.diehard-gaming.com"/> 
+
+	<announcement text="Help grow MoreCore. If you would like to support MoreCore you can do so in the following ways:\r\n* Use MoreCore and spread the word about the systems you are playing\r\n* Use MoreCore and upload and share Character sheets (and even campaigns) and instructions for the systems you are playing\r\n* Creating new Rolls for MoreCore and allowing them to be included into MoreCore\r\n* Creating new Theme Extensions for MoreCore and sharing them on the forums\r\n* If you would like to make a donation to help feed my RPG habit you can donate at PayPal.me/fgdamned" icon="handshake" font="oocfont" link="https://www.paypal.me/fgdamned"/> 
+
+	<!-- Help Files -->
+	<icon name="imlogo" file="logo.png" />
+	<announcement text="Type /morecorehelp to access the MoreCore User Manual in game.  Rolls should be added to the PC and NPC sheets and not used in Chat. http://www.diehard-gaming.com/mchelp.html" icon="imlogo" font="emotefont"/> 
+
+	<!-- MoreCore specific Options found in Campaign Tools -> Options -->
+	<icon name="fgcon" file="graphics/logos/fgcon.png" />
+	<!-- MoreCore specific script to display Chat Window Message on startup -->
+	<announcement text="Visit http://www.fg-con.com for the best online RPG convention. Every year in April and October." icon="fgcon" font="emotefont" link="http://www.fg-con.com"/> 
+
+	<!-- Layers -->
+	<importruleset source="CoreRPG" />
+
+
+	<!-- Tabletop settings -->
+	<includefile source="gameelements.xml" />
+
+	<!-- Party sheet -->
+	<includefile source="ps/template_ps.xml" />
+	<includefile source="ps/ps.xml" />
+	<includefile source="ps/ps_xp.xml" />
+
+	<!-- Campaign Records -->
+	<!-- MoreCore specific Graphics -->
+	<includefile source="graphics/graphics_icons.xml" />
+	<!-- MoreCore specific Graphics change GM Portrait -->
+	<includefile source="graphics/graphics_portraits.xml" />
+	<!-- MoreCore specific Frame Graphics -->
+	<includefile source="graphics/graphics_frames.xml" />
+	<!-- MoreCore specific Radial Menu Graphics extra Dice -->
+	<includefile source="graphics/graphics_radial.xml" />
+	<!-- MoreCore specific GM Combat Tracker view -->
+	<includefile source="ct/ct_host.xml" />
+	<!-- MoreCore specific Client Combat Tracker view -->
+	<includefile source="ct/ct_client.xml" />
+	<!-- MoreCore specific Templates used for the /ct files eg combattracker for Host and Client -->
+	<includefile source="ct/template_ct.xml" />
+	<!-- MoreCore specific Templates used for the /campaign files eg Char and NPC Sheets -->
+	<includefile source="campaign/template_campaign.xml" />
+	<!-- MoreCore specific NPC Sheet -->
+	<includefile source="campaign/record_npc.xml" />
+	<!-- MoreCore specific Character Sheet Setup - includes references to MoreCore Tab -->
+	<includefile source="campaign/record_char.xml" />
+	<!-- DicePool specific changes to Main Character Sheet Tab -->
+	<includefile source="campaign/record_char_main.xml" />
+	<!-- DicePool specific changes to Notes Character Sheet Tab -->
+	<includefile source="campaign/record_char_notes.xml" />
+	<!-- MoreCore specific Character Sheet Tab - MoreCore -->
+	<includefile source="campaign/record_char_more.xml" />
+	<!-- MoreCore specific Character Sheet Tab - MoreData -->
+	<includefile source="campaign/record_char_moredata.xml" />
+	<!-- MoreCore specific Translation Strings. All Strings in English. -->
+	<includefile source="strings/strings_morecore.xml" />
+	<includefile source="strings/strings_dp.xml" />
+	<!-- MoreCore specific fonts -->
+	<includefile source="graphics/graphics_fonts_mc.xml" />
+	<!-- MoreCore specific Funky Dice for DCC -->
+	<includefile source="common/funky_dice.xml" />
+	<!-- MoreCore specific Templates for C1-C5 Names -->
+	<includefile source="common/template_common.xml" />
+	<!-- MoreCore specific Templates for Character Sheet Abilities -->
+	<includefile source="campaign/record_char_abilities.xml" /> 
+	<!-- MoreCore specific Templates for Branding  -->
+	<includefile source="campaign/template_branding.xml" />
+	<!-- MoreCore specific Templates for NPC Sheet -->
+	<includefile source="campaign/template_npc.xml" />
+	<!-- MoreCore specific Reference Windows 
+	<includefile source="ref/ref_attributes.xml" />-->
+	<!-- MoreCore specific Scroll Bars -->
+	<includefile source="common/template_windows.xml" />
+
+	<!-- MoreCore specific Modifiers Window 
+	<includefile source="utility/utility_modifiers.xml" /> -->
+
+	<!-- MoreCore specific Tab List View for GM and Players -->
+	<includefile source="common\template_lists.xml" />
+
+	<!-- MoreCore specific DicePool -->
+	<includefile source="desktop/desktop_classes.xml" />
+	<includefile source="desktop/desktop_panels.xml" />
+
+	<!-- MoreCore Campaign Tools -->
+	<!-- Creates the CAS button in Campaign Tools -->
+	<includefile source="campaign/record_cas.xml" />
+
+	<!-- Creates the Trackers button in Campaign Tools -->
+	<includefile source="campaign/record_trackers.xml" />
+
+	<!-- Setup -->
+	<includefile source="utility/utility_setup.xml" />
+
+	<!-- MoreCore Campaign Tools -->
+	<!-- Creates the Spells button in Campaign Tools -->
+	<includefile source="campaign/record_spells.xml" />
+
+	<!-- Creates the Locations button in Campaign Tools -->
+	<includefile source="campaign/record_locations.xml" />
+
+	<!-- Creates the Organisations button in Campaign Tools -->
+	<includefile source="campaign/record_organisations.xml" />
+
+	<!-- Creates the ABILITIES button in Campaign Tools 
+	<includefile source="campaign/record_mcability.xml" /> -->
+	<!-- Creates the MCMOD button in Campaign Tools 
+	<includefile source="campaign/record_mcmod.xml" /> -->
+
+	<!-- Party Sheet Helpers -->
+ 	<script name="PartyManager2" file="ps/scripts/manager_ps2.lua" />
+
+	<!-- Character Sheet Helpers 
+	<script name="MCCharacterUpdate" file="campaign/scripts/functions_record_char_more.lua" /> -->
+
+	<script name="Json" file="scripts/json.lua" />
+	<script name="DiceHelp" file="desktop/scripts/dicehelp.lua" />
+	<script name="MoreCoreHelp" file="desktop/scripts/morecorehelp.lua" />
+
+	<!-- MoreCore specific Options found in Campaign Tools -> Options -->
+	<script name="OptionsMoreCore" file="scripts/data_options_morecore.lua" />
+
+	<!-- MoreCore specific Export for new Campaign Tools 
+	<script name="ExportManagerMoreCore" file="scripts/manager_export_morecore.lua" />  -->
+	<script name="VersionManager2" file="scripts/manager_version2.lua" />
+
+	<!-- MoreCore ActionManager defines the new Attack roll -->
+	<script name="ActionsManager2" file="scripts/manager_actions2.lua" />
+	
+	<!-- MoreCore 0.60 - AttackManager defines the new Attack roll -->
+	<script name="AttackManager" file="scripts/manager_action_attack.lua" />
+
+	<!-- MoreCore 0.60 - GameSystem adds the new Attack -->
+	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />
+
+	<!-- MoreCore Load Desktop 
+	<script name="LibraryManager" file="scripts/manager_library_mc.lua" />-->
+	<script name="DesktopManager" file="scripts/manager_desktop.lua" />
+
+
+	<script name="DesktopMoreCore" file="desktop/scripts/data_library_mc.lua" /> 
+	<!-- MoreCore Dice Extensions -->
+	<script name="CountSuccesses" file="desktop/scripts/morecore_trenloe_countsuccesses.lua" />
+	<script name="RollUnder" file="desktop/scripts/morecore_damned_rollunder.lua" />
+	<script name="RollUnderDMod" file="desktop/scripts/morecore_damned_rollunderdmod.lua" />
+	<script name="RollUnderSMod" file="desktop/scripts/morecore_damned_rollundersmod.lua" />
+	<script name="RollOver" file="desktop/scripts/morecore_damned_rollover.lua" />
+
+	<includefile source="desktop/ikael_desktop_classes.xml" />
+	<script name="DiceMechanicsManager" file="desktop/scripts/morecore_ikael_dicemechanics.lua" />
+
+	<script name="Conan" file="desktop/scripts/morecore_damned_conan.lua" />
+	<script name="Coriolis" file="desktop/scripts/morecore_damned_coriolis.lua" />
+	<script name="SuccessFail" file="desktop/scripts/morecore_frostbyte_successfail.lua" />
+	<script name="WODdice" file="desktop/scripts/morecore_frostbyte_wod.lua" />
+	<script name="CStun" file="desktop/scripts/morecore_damned_cstun.lua" />
+	<script name="CKill" file="desktop/scripts/morecore_damned_ckill.lua" />
+
+	<!--  Dice Pool -->
+	<script name="DicePool" file="desktop/scripts/dicepool.lua"/>
+	<script name="PoolCommand" file="desktop/scripts/pool_command_handler.lua"/>
+
+
+	<!-- High-level scripts -->
+	<!-- HeroPoint Portraits -->
+	<script name="CharacterListManager_HeroPoints" file="scripts/manager_charlist_heropoints.lua" />
+	<!-- MoreCore specific Combat Tracker Scripts 
+	<script name="ActorManager2" file="scripts/manager_actor2.lua" />-->
+	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
+	<script name="CustomDiceManager" file="scripts/manager_custom_dice.lua" />
+	<script name="CustomDicePbta" file="scripts/manager_custom_pbta.lua" />
+	<script name="CustomDicePulpInv" file="scripts/manager_custom_pulpinv.lua" />
+	<script name="CustomDicePulpGen" file="scripts/manager_custom_pulpgen.lua" />
+	<script name="CustomDiceQin" file="scripts/manager_custom_qin.lua" />
+	<script name="CustomDiceRolld" file="scripts/manager_custom_rolld.lua" />
+	<script name="CustomDiceRollLow" file="scripts/manager_custom_rolllow.lua" />
+	<script name="CustomDiceRollk" file="scripts/manager_custom_rollk.lua" />
+    <script name="CustomDiceHitos" file="scripts/manager_custom_hitos.lua" />
+    <script name="CustomDiceSave" file="scripts/manager_custom_save.lua" />
+    <script name="CustomDiceHeal" file="scripts/manager_custom_heal.lua" />
+    <script name="CustomDiceDamage" file="scripts/manager_custom_damage.lua" />
+    <script name="CustomDiceThac0" file="scripts/manager_custom_thac0.lua" />
+    <script name="CustomDiceBlackCrusade" file="scripts/manager_custom_blackcrusade.lua" />
+    <script name="CustomDiceHarn" file="scripts/manager_custom_harn.lua" />
+    <script name="CustomDiceHarnSkill" file="scripts/manager_custom_harnskill.lua" />
+    <script name="CustomDiceTraveller" file="scripts/manager_custom_traveller.lua" />
+    <script name="CustomDiceSymbaroum" file="scripts/manager_custom_symb.lua" />
+	<script name="CustomDiceOrderResult" file="scripts/manager_custom_orderresult.lua" />
+	<script name="CustomDicePendragon" file="scripts/manager_custom_pendragon.lua" />
+	<script name="CustomDiceTalislanta" file="scripts/manager_custom_talislanta.lua" />
+    <script name="CustomDiceDSR" file="scripts/manager_custom_dsr.lua" />
+	<script name="CustomDiceBoon" file="scripts/manager_custom_boon.lua" />
+	<script name="CustomDiceBane" file="scripts/manager_custom_bane.lua" />
+    <script name="CustomDiceUbiquity" file="scripts/manager_custom_ubiquity.lua" />
+    <script name="CustomDiceChampions" file="scripts/manager_custom_champions.lua" />
+    <script name="CustomDiceChampionsSkill" file="scripts/manager_custom_championsskill.lua" />
+    <script name="CustomDiceBethicaFeat" file="scripts/manager_custom_bfeat.lua" />
+    <script name="CustomDiceStunt" file="scripts/manager_custom_stunt.lua" />
+    <script name="CustomDiceStuntDamage" file="scripts/manager_custom_stuntdamage.lua" />
+    <script name="CustomDiceBethicaRanged" file="scripts/manager_custom_branged.lua" />
+    <script name="CustomDiceBethicaMelee" file="scripts/manager_custom_bmelee.lua" />
+    <script name="CustomDiceBethicaReaction" file="scripts/manager_custom_breaction.lua" />
+    <script name="CustomDiceBethicaSave" file="scripts/manager_custom_bsave.lua" />
+    <script name="CustomDiceBethicaSpell" file="scripts/manager_custom_bspell.lua" />
+    <script name="CustomDiceBethicaCleric" file="scripts/manager_custom_bcleric.lua" />
+    <script name="CustomDiceChallenge" file="scripts/manager_custom_challenge.lua" />
+    <script name="CustomDiceAve" file="scripts/manager_custom_ave.lua" />
+    <script name="CustomDiceTrolls" file="scripts/manager_custom_trolls.lua" />
+    <script name="CustomDiceExplode" file="scripts/manager_custom_explode.lua" />
+    <script name="CustomDiceTorg" file="scripts/manager_custom_torg.lua" />
+    <script name="CustomDiceTorgU" file="scripts/manager_custom_torgu.lua" />
+    <script name="CustomDiceTorgBD" file="scripts/manager_custom_torgbd.lua" />
+    <script name="CustomDiceVagrant" file="scripts/manager_custom_vagrant.lua" />
+    <script name="CustomDiceMamen" file="scripts/manager_custom_mamen.lua" />
+    <script name="CustomDiceMaweapon" file="scripts/manager_custom_maweapon.lua" />
+	<script name="CustomDiceDSAatt" file="scripts/manager_custom_dsaatt.lua" />
+    <script name="CustomDiceDSAskill" file="scripts/manager_custom_dsaskill.lua" />
+	<script name="CustomDiceDSAInit" file="scripts/manager_custom_dsainit.lua" />
+	<script name="CustomDiceDSADamage" file="scripts/manager_custom_dsadamage.lua" />
+    <script name="CustomDicePnP" file="scripts/manager_custom_pnp.lua" />
+    <script name="CustomDiceTiny" file="scripts/manager_custom_tiny.lua" />
+    <script name="CustomDiceCrom" file="scripts/manager_custom_crom.lua" />
+	<script name="CustomDiceKult" file="scripts/manager_custom_kult.lua" />
+    <script name="CustomDiceUnisystem" file="scripts/manager_custom_unisystem.lua" />
+    <script name="CustomDiceWEG" file="scripts/manager_custom_weg.lua" />
+    <script name="CustomDiceWEGDefense" file="scripts/manager_custom_wegdefense.lua" />
+    <script name="CustomDiceWEGAttack" file="scripts/manager_custom_wegattack.lua" />
+    <script name="CustomDiceWEGDamage" file="scripts/manager_custom_wegdamage.lua" />
+    <script name="CustomDiceCrit" file="scripts/manager_custom_crit.lua" />
+    <script name="CustomDice2300AD" file="scripts/manager_custom_2300.lua" />
+    <script name="CustomDiceBTech" file="scripts/manager_custom_btech.lua" />
+    <script name="CustomDiceBTechU" file="scripts/manager_custom_btechu.lua" />
+    <script name="CustomDiceFrag" file="scripts/manager_custom_frag.lua" />
+    <script name="CustomDiceFragAtt" file="scripts/manager_custom_fragatt.lua" />
+    <script name="CustomDiceHackmaster" file="scripts/manager_custom_hackmaster.lua" />
+    <script name="CustomDiceHackmasterBS" file="scripts/manager_custom_hackmasterbs.lua" />
+	<script name="CustomDiceCoD" file="scripts/manager_custom_cod.lua" />
+	<script name="CustomDiceWitcher" file="scripts/manager_custom_witcher.lua" />
+	<script name="CustomDiceWitcherAttack" file="scripts/manager_custom_witcher_attack.lua" />
+	<script name="CustomDiceWitcherMonster" file="scripts/manager_custom_witcher_monster.lua" />
+	<script name="CustomDiceMasterBook" file="scripts/manager_custom_masterbook.lua" />
+    <script name="CustomDiceAFMBE" file="scripts/manager_custom_afmbe.lua" />
+    <script name="CustomDiceSeventh" file="scripts/manager_custom_seventh.lua" />
+    <script name="CustomDiceWrath" file="scripts/manager_custom_wrath.lua" />
+    <script name="CustomDiceWrathE" file="scripts/manager_custom_wrathe.lua" />
+    <script name="CustomDiceWrathP" file="scripts/manager_custom_wrathp.lua" />
+    <script name="CustomDiceWrathDMG" file="scripts/manager_custom_wrathdmg.lua" />
+    <script name="CustomDiceWrathBrutal" file="scripts/manager_custom_wrathdmgb.lua" />
+    <script name="CustomDiceWrathMelta" file="scripts/manager_custom_wrathdmgm.lua" />
+    <script name="CustomDiceArsMagica" file="scripts/manager_custom_arsmagica.lua" />
+    <script name="CustomDiceInit" file="scripts/manager_custom_init.lua" />
+    <script name="CustomDiceOLAdvAttribute" file="scripts/manager_custom_oladv_attribute.lua" />
+    <script name="CustomDiceOLAdvInitiative" file="scripts/manager_custom_oladv_initiative.lua" />
+    <script name="CustomDiceOLDisAttribute" file="scripts/manager_custom_oldis_attribute.lua" />
+    <script name="CustomDiceKilitar" file="scripts/manager_custom_kilitar.lua" />
+	<script name="CustomDiceInfinitySkill" file="scripts/manager_custom_infinityskill.lua" />
+	<script name="CustomDiceDBDamage" file="scripts/manager_custom_dbdamage.lua" />
+	<script name="CustomDiceFactorTwelve" file="scripts/manager_custom_factwelve.lua" />
+	<script name="CustomDiceEarthdawn" file="scripts/manager_custom_earthdawn.lua" />
+    <script name="CustomDiceShadowrun4" file="scripts/manager_custom_srun4.lua" />
+    <script name="CustomDiceGumshoe" file="scripts/manager_custom_gumshoe.lua" />
+	<script name="CustomDiceGSDamage" file="scripts/manager_custom_gsdamage.lua" />
+    <script name="CustomDiceIronsworn" file="scripts/manager_custom_iron.lua" />
+    <script name="CustomDiceGSAttack" file="scripts/manager_custom_gsattack.lua" />
+    <script name="CustomDiceSpellPoints" file="scripts/manager_custom_spellpoints.lua" />
+    <script name="CustomDiceAttackAC" file="scripts/manager_custom_attackac.lua" />
+    <script name="CustomDiceDamageRoll" file="scripts/manager_custom_damageroll.lua" />
+    <script name="CustomDiceDamageDR" file="scripts/manager_custom_damagedr.lua" />
+    <script name="CustomDiceDamageDR4" file="scripts/manager_custom_damagedr4.lua" />
+	<script name="CustomDiceDrWho" file="scripts/manager_custom_drwho.lua" />
+	<script name="CustomExalted" file="scripts/manager_custom_exalted.lua" />
+	<script name="CustomExaltedDamage" file="scripts/manager_custom_exalted_dmg.lua" />
+	<script name="CustomL5R" file="scripts/manager_custom_l5r.lua" />
+	<script name="CustomL5RExtra" file="scripts/manager_custom_l5r_extra.lua" />
+    <script name="CustomDiceDamageL5R" file="scripts/manager_custom_damagel5r.lua" />
+    <script name="CustomDiceWEGswd6" file="scripts/manager_custom_swd6.lua" />
+    <script name="CustomDiceMythras" file="scripts/manager_custom_mythras.lua" />
+		
+	<!--Basic number effects - takens from 3.5E ruleset.-->
+	<script name="EffectManagerMoreCore" file="scripts/manager_effect_MoreCore.lua" />		
+	
+	<!-- Ikael scripts for Initiative option --> 
+	<script name="MoreCore" file="scripts/init_option.lua" />
+	
+	<!-- Manager for updating Dice Roll Command from Parameters -->
+	<script name="ParameterManager" file="scripts/parameter_manager.lua" />	
+</root>

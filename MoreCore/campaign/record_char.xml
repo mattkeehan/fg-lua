@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet">
+		<frame>charsheet</frame>
+		<placement>
+			<size width="550" height="740" />
+		</placement>
+		<sizelimits>
+			<!--<maximum width="625" />-->
+			<minimum width="550" height="740" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_npc</minimize>
+		<tooltip field="name" />
+		<nodelete />
+		<softclose />
+		<playercontrol />
+		<script>
+			function onInit()
+				if User.isLocal() then
+					speak.setVisible(false);
+					portrait.setVisible(false);
+					localportrait.setVisible(true);
+				end
+			end
+		</script>
+		<sheetdata>
+			<button_charactivate name="speak">
+				<bounds>-41,30,23,22</bounds>
+			</button_charactivate>
+		
+			<tokenfield name="token">
+				<bounds>-86,23,40,40</bounds>
+				<empty>token_empty</empty>
+				<tooltip textres="char_tooltip_token" />
+				<script>
+					function onDoubleClick(x, y)
+						CombatManager.openMap(window.getDatabaseNode());
+					end
+				</script>
+			</tokenfield>
+		
+			<genericcontrol>
+				<bounds>-137,21,45,45</bounds>
+				<icon>charlist_base</icon>
+				<disabled />
+			</genericcontrol>
+			<portrait_charlocal name="localportrait">
+				<bounds>-137,21,45,45</bounds>
+				<invisible />
+			</portrait_charlocal>
+			<portrait_char name="portrait">
+				<bounds>-137,21,45,45</bounds>
+			</portrait_char>
+			
+			<frame_char name="overviewframe">
+				<bounds>15,20,-270,45</bounds>
+			</frame_char>
+			<string_labeled name="name">
+				<anchored to="overviewframe" position="insidetopleft" offset="15,10" height="20">
+					<right offset="-15" />
+				</anchored>
+				<labelres>char_label_name</labelres>
+			</string_labeled>
+
+			<!-- Hero Frame by damned -->
+			<!-- Frame Co-ordinates  -->
+			<frame_char name="heroframe">
+				<bounds>-270,20,130,45</bounds>
+			</frame_char>
+			<!-- Generic Benny/Fate/Hero/Luck Points  -->
+			<!-- number_pool is defined in campaign/template_campaign.xml  -->
+			<number_pool name="hero">
+				<anchored to="heroframe" position="insidetopright" offset="16,14" />
+				<description>
+					<text>Hero</text>
+				</description>
+			<!-- Script/Function for Using Benny/Fate/Hero/Luck Points  -->
+			<!-- Checks that there is a Hero Point available  -->
+			<!-- Gets the Actors name  -->
+			<!-- Gets the Hero Point name (player editable)  -->
+			<!-- Displays that Actors is using a Hero Point  -->
+			<!-- Decrements the Hero Point pool  -->
+				<script>
+					function onDoubleClick(x, y)
+						if getValue() > 0 then
+							local rActor = ActorManager.getActor("pc", window.getDatabaseNode());
+							Debug.console("rActor: ");
+							Debug.console(rActor);
+							local nodeWin = window.getDatabaseNode();
+							Debug.console("nodeWin: ");
+							Debug.console(nodeWin);
+							local sHeroType = nodeWin.getChild("pc_hero_points").getValue();
+							Debug.console("sHeroType: ");
+							Debug.console(sHeroType);
+							local msg = {font = "msgfont", icon = "heropoints"};
+							msg.text = rActor.sName .. " is using a " .. sHeroType;
+							Comm.deliverChatMessage(msg);
+							setValue(getValue()-1);
+						end
+						return true;
+					end
+				</script>
+				<default>7</default>
+			</number_pool>
+
+			<!-- Label Text is found in /strings/strings_morecore.xml -->
+			<!-- User Editable Label -->
+		<string_useredit name="pc_label_hero" source="pc_hero_points">
+				<anchored to="heroframe" position="insidetopleft" offset="10,14" />
+				<default>Hero Point</default>
+				<tooltip textres="label_heropoints" />
+		</string_useredit>
+			
+<!--   Added new MoreCore Tab to the Character Sheet -->
+<!--   "more" is a reference only. charsheet_more refers to <windowclass name="charsheet_more"> which is found in the \campaign\record_char_more.xml file  -->
+			<subwindow name="more">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_more</class>
+			</subwindow> 
+			<subwindow name="moredata">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_moredata</class>
+			</subwindow> 
+			<subwindow name="main">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_main</class>
+			</subwindow>
+			<subwindow name="abilities">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_abilities</class>
+			</subwindow>
+			<subwindow name="inventory">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_inventory</class>
+			</subwindow>
+			<subwindow name="notes">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_notes</class>
+			</subwindow>
+
+			<tabs_charsheet>
+<!--   Added new MoreCore Tab to the Character Sheet -->
+				<tab>
+<!--   Create transparent PNG file with text for the new Tab. File lives under \graphics\tabs -->
+					<icon>tab_more</icon>
+					<subwindow>more</subwindow>
+				</tab> 
+				<tab>
+<!--   Create transparent PNG file with text for the new Tab. File lives under \graphics\tabs -->
+					<icon>tab_moredata</icon>
+					<subwindow>moredata</subwindow>
+				</tab> 
+				<tab>
+					<icon>tab_main</icon>
+					<subwindow>main</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_abilities</icon>
+					<subwindow>abilities</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_inventory</icon>
+					<subwindow>inventory</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_notes</icon>
+					<subwindow>notes</subwindow>
+				</tab>
+				<activate>1</activate>
+			</tabs_charsheet>
+			<helper_mc_charsheet />
+		
+			<close_charsheet />
+		</sheetdata>
+	</windowclass>
+</root>

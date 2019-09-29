@@ -1,0 +1,913 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="combattracker_host">
+		<frame>ctbox</frame>
+		<placement>
+			<size width="500" height="500" />
+		</placement>
+		<sizelimits>
+			<minimum width="500" height="500" />
+			<dynamic />
+		</sizelimits>
+
+		<softclose />
+		<nodelete />
+
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>ct_window_title</resource>
+				
+					</windowtitlebar>
+			<anchor_title_ctbox name="contentanchor" />
+
+			<anchor_ctbox_host_header >
+			</anchor_ctbox_host_header >
+			<frame_ctbox_host_header_visibility />
+			<buttoncontrol name="button_global_visibility">
+				<anchored to="header_vis" position="insidetopleft" offset="10,8" width="20" height="20" />
+				<state icon="visibilityoff" tooltipres="ct_tooltip_shownpcallon" />
+				<state icon="visibilityon" tooltipres="ct_tooltip_shownpcalloff" />
+				<script>
+					function onValueChanged()
+						window.list.toggleVisibility();
+					end
+				</script>
+			</buttoncontrol>
+
+			<label_ct>
+				<anchored to="headeranchor" position="insidetopleft" offset="33,0" />
+				<static textres="ct_label_name" />
+				<center />
+			</label_ct>
+			<label_ct name="label_init">
+				<anchored to="headeranchor" position="insidetopright" offset="143,0" width="40" />
+				<static textres="ct_label_init" />
+				<script>
+					function onInit()
+						local sMCInit = OptionsManager.getOption("MCInit");
+
+						local sWhereAmI = window.getClass();
+
+						if sMCInit == "Off" then 
+							setVisible(false);
+							end;
+						if sMCInit == "Both" then 
+							setVisible(true);
+							end
+						end
+				</script>
+		<center />
+		</label_ct>
+
+			<!-- Added by Damian -->
+<!-- Column5 - Visibiity set by Script below.  -->
+		<stringw name="label_five" source="label.five">
+				<anchored to="label_init" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>C5</default>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC5 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- The "sWhereAmI" is to tell me where we are in the DB schema -->
+<!-- There are three possible values for MCC5 - "Off" "GM" "Both" -->
+<!-- There are two possible values for sColumnColour - "Black" "White"   -->
+								<script>
+					function onInit()
+			local sColumn5 = OptionsManager.getOption("MCC5");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn5 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn5 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn5 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+		</script>
+		</stringw>
+
+<!-- Column4 - Visibiity set by Script below.  -->
+		<stringw name="label_four" source="label.four">
+				<anchored to="label_five" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>C4</default>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC4 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+								<script>
+					function onInit()
+			local sColumn4 = OptionsManager.getOption("MCC4");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn4 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn4 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn4 == "Both" then 
+						setVisible(true);
+						end;
+						end;		
+					</script>
+		</stringw>
+<!-- ColumnHealthBar - Visibiity set by Script below.  -->
+		<stringw name="label_healthbar" source="label.healthbar">
+				<anchored to="label_four" width="6" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>X</default>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC3 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn3 = OptionsManager.getOption("MCC3");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn3 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn3 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn3 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+		<!-- Column3 - Visibiity set by Script below.  -->
+		<stringw name="label_three" source="label.three">
+				<anchored to="label_four" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>Wnds</default>
+				<tooltip textres="ct_label_label_description" />
+				<center />
+<!-- Script looks for an Option called MCC3 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn3 = OptionsManager.getOption("MCC3");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn3 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn3 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn3 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+<!-- Column2 - Visibiity set by Script below.  -->
+		<stringw name="label_two" source="label.two">
+				<anchored to="label_three" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<default>Dfnc</default>
+				<tooltip textres="ct_label_label_defence" />
+				<center />
+<!-- Script looks for an Option called MCC2 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn2 = OptionsManager.getOption("MCC2");
+			local sWhereAmI = window.getClass();
+
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn2 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn2 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn2 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+<!-- Column1 - Visibiity set by Script below.  -->
+		<stringw name="label_one" source="label.one">
+				<anchored to="label_two" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<editable />
+				<default>Hlth</default>
+				<tooltip textres="ct_label_label_health" />
+				<center />
+<!-- Script looks for an Option called MCC1 and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options from \scripts\data_options_morecore.lua -->
+					<script>
+					function onInit()
+			local sColumn1 = OptionsManager.getOption("MCC1");
+			local sWhereAmI = window.getClass();
+
+				local sColumnColour = OptionsManager.getOption("CTCHC");
+						setColor(sColumnColour);
+
+						if sColumn1 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn1 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn1 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+					</script>
+		</stringw>
+
+		<!-- END Additions by Damian -->
+
+			<frame_ctbox_host_header_toggles />
+			<buttoncontrol name="button_global_targeting">
+				<anchored to="header_toggles" position="insidetopleft" offset="10,8" width="20" height="20" />
+				<state icon="button_section_targeting" />
+				<state icon="button_section_targeting_down" />
+				<script>
+					function onValueChanged()
+						window.list.toggleTargeting();
+					end
+				</script>
+			</buttoncontrol>
+		<!-- Begin Global Icon for Rolls -->
+			<buttoncontrol name="button_global_rolls">
+				<anchored to="header_toggles" position="insidetopleft" offset="70,8" width="20" height="20" />
+				<state icon="button_rolls" />
+				<state icon="button_rolls_down" />
+				<script>
+					function onValueChanged()
+						window.list.toggleRolls();
+					end
+				</script>
+			</buttoncontrol>
+		<!-- End Global Icon for Rolls -->
+		
+		<!-- Begin Additions by Ian M Ward -->
+		<!-- Add Global Icon for Attacks -->
+			<buttoncontrol name="button_global_active">
+				<anchored to="header_toggles" position="insidetopleft" offset="90,8" width="20" height="20" />
+				<state icon="button_sword" />
+				<state icon="button_sword_down" />
+				<script>
+					function onValueChanged()
+						window.list.toggleActive();
+					end
+				</script>
+			</buttoncontrol>
+		<!-- End Global Icon for Attacks -->
+			<buttoncontrol name="button_global_spacing">
+				<anchored to="header_toggles" position="insidetopleft" offset="30,8" width="20" height="20" />
+				<state icon="button_space" />
+				<state icon="button_space_down" />
+				<script>
+					function onValueChanged()
+						window.list.toggleSpacing();
+					end
+				</script>
+			</buttoncontrol>
+			<buttoncontrol name="button_global_effects">
+				<anchored to="header_toggles" position="insidetopleft" offset="50,8" width="20" height="20" />
+				<state icon="button_effect" />
+				<state icon="button_effect_down" />
+				<script>
+					function onValueChanged()
+						window.list.toggleEffects();
+					end
+				</script>
+			</buttoncontrol>
+		
+			<windowlist name="list">
+				<bounds>0,65,-20,-50</bounds>
+				<datasource>.list</datasource>
+				<class>ct_entry</class>
+				<empty font="list-empty" textres="ct_emptylist" />
+				<script file="ct/scripts/ct.lua" />
+			</windowlist>
+<!-- 				
+			<list_ctbox_host />
+-->
+			<scrollbar_list />
+			
+			<button_ct_setactive />
+			<button_ct_nextactor />
+			<button_ct_clearturns />
+			<button_ct_zeroinit />
+			<button_ct_rerollinit />
+
+			<button_ct_faction_friend />
+			<button_ct_faction_neutral />
+			<button_ct_faction_foe />
+
+			<button_ct_menu />
+
+			<label_ct_host_rounds />
+			<number_ct_host_rounds />
+			<button_ct_nextround />
+			
+			<resize_ctbox />
+			<close_ctbox />
+			<helper_mc_ct />
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="ct_entry">
+		<margins control="0,0,0,2" />
+		<frame>ctentrybox</frame>
+		<sizelimits>
+			<minimum height="40" />
+		</sizelimits>
+		<script file="ct/scripts/ct_entry.lua" />
+		<sheetdata>
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+			<hn name="tokenscale">
+				<default>1</default>
+				<script>
+					function onValueChanged()
+						window.token.onScaleChanged();
+					end
+				</script>
+			</hn>
+			
+			<spacer_ctentry_active_top name="active_spacer_top" />
+			<button_ctentry_active name="active" />
+			<token_ctentry name="token" />
+			<button_ctentry_tokenvis name="tokenvis" />
+			<button_ctentry_isidentified name="isidentified" />
+			
+			<button_ctentry_turn name="turn">
+				<anchored to="token" position="belowright" offset="23,-13" />
+<!-- Script looks for an Option called MCTurns and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- There are three possible values for MCTurns - "Off" "GM" "Both" -->
+				<script>
+					function onInit()
+						local sTurnVal = OptionsManager.getOption("MCTurns");
+
+						if sTurnVal == "Off" then 
+						setVisible(false);
+						end;
+						if sTurnVal == "GM" then 
+						setVisible(true);
+						end;
+						if sTurnVal == "Both" then 
+						setVisible(true);
+						end;
+						end;
+				</script>
+			</button_ctentry_turn>
+			
+			<anchor_ctentry_right name="rightanchor" />
+			<button_ctentry_idelete name="idelete" />
+			<link_ctentry name="link" />
+
+		<!-- Add Entry Icon for Attacks -->
+			<buttoncontrol name="activateactive">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" />
+				</anchored>
+				<tooltip textres="ct_tooltip_offense" />
+				<state icon="button_sword" />
+				<state icon="button_sword_down" />
+				<script>
+					function onValueChanged()
+						window.setActiveVisible();
+						window.windowlist.onEntrySectionToggle();
+					end
+				</script>
+			</buttoncontrol>
+		<!-- Add Entry Icon for Rolls -->
+			<buttoncontrol name="activaterolls">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" />
+				</anchored>
+				<tooltip textres="ct_tooltip_rolls" />
+				<state icon="button_rolls" />
+				<state icon="button_rolls_down" />
+				<script>
+					function onValueChanged()
+						window.setRollsVisible();
+						window.windowlist.onEntrySectionToggle();
+					end
+				</script>
+			</buttoncontrol>
+		<!-- End Entry Icon for Attacks -->
+
+		<button_ctentry_activateeffects name="activateeffects" />
+			<button_ctentry_activatespacing name="activatespacing" />
+
+
+			<button_ctentry_activatetargeting name="activatetargeting" />
+			<button_ctentry_friendfoe name="friendfoe" />
+
+
+			<!-- changed to "number_ct_crosslink" template to sync with the "order" field in the Character sheet -->
+		<!-- need to make this field GM editable still for Characters -->
+			<number_ct_crosslink name="initresult" source="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<tabtarget prev="fieldfour" />
+				<script>
+					function onInit()
+						local sMCInit = OptionsManager.getOption("MCInit");
+						local sWhereAmI = window.getClass();
+
+			
+						if sMCInit == "Off" then 
+							setVisible(false);
+							end;
+						if sMCInit == "Both" then 
+							setVisible(true);
+							window.windowlist.applySort();
+							end
+						end
+					function onValueChanged()
+						window.windowlist.applySort();
+					end
+				</script>
+			</number_ct_crosslink>
+
+			<!-- Extra Fields by Damian -->
+			<number_ct_crosslink name="fieldfive">
+				<anchored to="initresult" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="fieldfour"  next="initresult"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+								<script>
+					function update()
+			local sColumn5 = OptionsManager.getOption("MCC5");
+			local sWhereAmI = window.getClass();
+
+				local sC5Colour = OptionsManager.getOption("MCC5C");
+						setColor(sC5Colour);
+
+				
+				if sColumn5 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn5 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn5 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+
+		</script>
+		</number_ct_crosslink>
+
+			<number_ct_crosslink name="fieldfour">
+				<anchored to="fieldfive" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="fieldthree"  next="fieldfive"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+								<script>
+					function update()
+			local sColumn4 = OptionsManager.getOption("MCC4");
+			local sWhereAmI = window.getClass();
+
+				local sC4Colour = OptionsManager.getOption("MCC4C");
+						setColor(sC4Colour);
+
+						if sColumn4 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn4 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn4 == "Both" then 
+						setVisible(true);
+						end;
+						end;
+		</script>
+		</number_ct_crosslink>
+
+			<button_ctentry_health name="nowound">
+				<anchored to="fieldfour">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<script>
+				</script>
+			</button_ctentry_health>
+
+		<number_ct_crosslink name="fieldthree" source="wounds">
+				<anchored to="nowound" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="defence"  next="fieldfour"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+				<script>
+					function update()
+					  local sColumn3 = OptionsManager.getOption("MCC3");
+					  local sWhereAmI = window.getClass();
+					
+					  local sC3Colour = OptionsManager.getOption("MCC3C");
+					  setColor(sC3Colour);
+					
+					
+					  local sSumTotal = OptionsManager.getOption("MCC3SUM");
+					
+					  if sColumn3 == "Off" then 
+					    setVisible(false);
+					  end;
+					  if sColumn3 == "GM" then 
+					    setVisible(true);
+					  end;
+					  if sColumn3 == "Both" then 
+					    setVisible(true);
+					  end
+
+						local sCurrWounds = getValue();
+					  	local nCurrWounds = tonumber(sCurrWounds);
+
+						local pcdbnode = window.link.getTargetDatabaseNode();
+
+							local nodeWin = window.getDatabaseNode();
+
+
+							if nCurrWounds > 10 then
+							nodeWin.getChild("nowound").setValue("largewound") 
+							elseif nCurrWounds > 0 then
+								nodeWin.getChild("nowound").setValue("smallwound") 
+							end
+							if nCurrWounds == 0 then
+								nodeWin.getChild("nowound").setValue("nowound")
+							end
+						
+					local sClass, sRecordname = nodeWin.getChild("link").getValue();
+					if sClass == "npc" then
+						local nHealth = nodeWin.getChild("health").getValue();
+						local sActor = nodeWin.getChild("name").getValue();
+							if nCurrWounds > nHealth then 
+							local sTokenValue = nodeWin.getChild("token").getValue();
+							nodeWin.createChild("tokenoriginal").setValue("sTokenValue", token)
+							nodeWin.getChild("token").setValue("tokens/shared/dead.png");
+							local sTokenrefnode = nodeWin.getChild("tokenrefnode").getValue();
+
+	if imageinstance then
+		TokenManager.linkToken(getDatabaseNode(), imageinstance);
+	end
+
+								else Debug.console(sActor .. " fights on.")
+							end
+						end
+					end
+					
+					function onDrop(x, y, draginfo)
+						local sCurrWounds = getValue();
+					  	local nCurrWounds = tonumber(sCurrWounds);
+						local sNumberWounds = draginfo.getNumberData();
+					  	local nNumberWounds = tonumber(sNumberWounds);
+						local nNewWounds = nCurrWounds + nNumberWounds;
+						setValue(nNewWounds);
+					
+							local pcdbnode = window.link.getTargetDatabaseNode();
+
+							local nodeWin = window.getDatabaseNode();
+
+							if nNewWounds > 10 then
+							nodeWin.getChild("nowound").setValue("largewound") 
+							elseif nNewWounds > 0 then
+								nodeWin.getChild("nowound").setValue("smallwound") else
+								nodeWin.getChild("nowound").setValue("nowound")
+							end
+					
+					end
+
+
+
+							
+			</script>
+		</number_ct_crosslink>
+			<number_ct_crosslink name="defence" source="defence">
+				<anchored to="fieldthree" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="health"  next="fieldthree"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+			<script>
+					function update()
+			local sColumn2 = OptionsManager.getOption("MCC2");
+			local sWhereAmI = window.getClass();
+
+				local sC2Colour = OptionsManager.getOption("MCC2C");
+						setColor(sC2Colour);
+
+				if sColumn2 == "Off" then 
+						setVisible(false);
+						end
+						if sColumn2 == "GM" then 
+						setVisible(true);
+						end
+						if sColumn2 == "Both" then 
+						setVisible(true);
+						end
+					end
+		</script>			
+		</number_ct_crosslink>
+			<number_ct_crosslink name="health" source="health">
+				<anchored to="defence" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="name" next="defence"/>
+<!-- Script looks for an Option called MCCx and sets visibility on this element based on its value. Options are managed in \scripts\data_options_morecore.lua -->
+<!-- Script sets colour options "Black" "Green" "Red" "Blue" from \scripts\data_options_morecore.lua -->
+			<script>
+					function update()
+			local sColumn1 = OptionsManager.getOption("MCC1");
+			local sWhereAmI = window.getClass();
+				
+				local sC1Colour = OptionsManager.getOption("MCC1C");
+						setColor(sC1Colour);
+
+						if sColumn1 == "Off" then 
+						setVisible(false);
+						end;
+						if sColumn1 == "GM" then 
+						setVisible(true);
+						end;
+						if sColumn1 == "Both" then
+						setVisible(true);
+						end;
+						end;
+		</script>
+		</number_ct_crosslink>
+
+			<!-- END Extra Fields by Damian -->
+
+			<string_ctname name="name" />
+			<string_ctname_nonid name="nonid_name" />
+			
+			<!-- Targeting subsection -->
+			<icon_ctsection_targeting name="targetingicon" />
+			<sub_ctsection_targeting name="sub_targeting" />
+			<frame_ctsection_targeting name="frame_targeting" />
+
+			<!-- Rolls subsection -->
+			<icon_ctsection_rolls name="rollsicon" />
+			<label_ctentry_rolls name="rolls_label" />
+
+			
+			<list_text name="monsterrolls" source="clilist2">
+				<anchored>
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="35" />
+					<left parent="rolls_label" anchor="right" offset="5" />
+					<right offset="-15" />
+				</anchored>
+				<datasource>.clilist2</datasource>
+				<class>cli_rolls</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<frame_ctsub_rolls name="frame_rolls">
+                <anchored>
+                    <top parent="rolls_label" />
+                    <bottom parent="monsterrolls" />
+                </anchored>
+			</frame_ctsub_rolls>
+			
+			<!-- Offense subsection -->
+			<icon_ctsection name="activeicon">
+				<icon>button_sword_down</icon>
+			</icon_ctsection>
+			<label name="atk_label">
+				<anchored to="activeicon" position="righthigh" offset="10,0" />
+				<static textres="ct_label_attack" />
+				<tooltip textres="ct_label_attack_description" />
+			</label>
+			<string_ct name="atk" source="attacks">
+				<anchored>
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="35" />
+					<left parent="atk_label" anchor="right" offset="5" />
+					<right offset="-15" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<!-- npc_attack.lua allows us to introduce the Attacker and Targets names to the Chat Window Result -->
+				<script file="campaign/scripts/npc_attack.lua" />
+			</string_ct>
+			<string_simple_ct name="monsteratk" source="attacks">
+				<anchored>
+					<top parent="active_spacer_top" anchor="bottom" relation="relative" offset="35" />
+					<left parent="atk_label" anchor="right" offset="5" />
+					<right offset="-15" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<!-- npc_attack.lua allows us to introduce the Attacker and Targets names to the Chat Window Result -->
+				<script file="campaign/scripts/npc_attack.lua" />
+			</string_simple_ct>
+			<frame_ctsub name="frame_active">
+				<anchored>
+					<top parent="activeicon" />
+					<bottom parent="monsteratk" />
+				</anchored>
+			</frame_ctsub>
+			
+			<!-- Spacing subsection -->
+			<icon_ctsection_spacing name="spacingicon" />
+			<number_ctentry_space name="space" />
+			<label_ctentry_space name="spacelabel" />
+			<number_ctentry_reach name="reach" />
+			<label_ctentry_reach name="reachlabel" />
+			<frame_ctsection_spacing name="frame_spacing" />
+
+			<!-- Effect subsection -->
+			<icon_ctsection_effect name="effecticon" />
+			<list_ctsection_effect name="effects" />
+			<button_ctsection_effect_iadd name="effects_iadd" />
+			<frame_ctsection_effect name="frame_effects" />
+
+
+
+			<!-- Quick labels -->
+			<string_ctentry_targets name="target_summary" />
+			<string_ctentry_effects name="effect_summary" />
+
+			<spacer_ctentry_middle name="spacer" />
+			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
+			
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ct_effect">
+		<margins control="0,0,0,2" />
+		<script file="ct/scripts/ct_effect.lua" />
+		<sheetdata>
+			<base_ct_effect name="base" />
+			
+			<anchor_ct_effect_left name="leftanchor" />
+			<button_ct_effect_isactive name="isactive" />
+			<button_ct_effect_isgmonly name="isgmonly" />
+			
+			<anchor_ct_effect_right name="rightanchor" />
+			<button_ct_effect_idelete name="idelete" />
+			<button_ct_effect_targetadd name="targeting_add_button" />
+			<number_ct_effect_init name="init" />
+			<number_ct_effect_duration name="duration" />
+
+			<string_ct_effect name="label" />
+
+			<hs_ct_effect_source name="source_name" />
+			<string_ct_effect_source name="source" />
+			<string_ct_effect_targets name="target_summary" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ct_targets">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<windowlist name="targets">
+				<anchored>
+					<top />
+					<left />
+					<right offset="-50" />
+				</anchored>
+				<datasource>.targets</datasource>
+				<class>ct_target</class>
+				<noscroll />
+				<columns>
+					<width>26</width>
+					<fillwidth />
+				</columns>
+			</windowlist>
+
+			<buttoncontrol name="targeting_add_button">
+				<bounds>-45,2,20,20</bounds>
+				<icon normal="button_targeting" pressed="button_targeting_down" />
+				<tooltip textres="ct_tooltip_dragtarget" />
+				<script>
+					function onInit()
+						registerMenuItem(Interface.getString("ct_menu_targeting"), "goto", 4);
+						registerMenuItem(Interface.getString("ct_menu_targetingfriend"), "turn", 4, 3);
+						registerMenuItem(Interface.getString("ct_menu_targetingnonfriend"), "mask", 4, 5);
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						local nodeWin = window.getDatabaseNode();
+						if not nodeWin then
+							return false;
+						end
+						
+						draginfo.setType("targeting");
+						draginfo.setIcon("drag_targeting");
+						draginfo.setShortcutData(window.getClass(), nodeWin.getNodeName());
+						
+						return true;
+					end
+
+					function onMenuSelection(selection, subselection)
+						if selection == 4 then
+							if subselection == 3 then
+								TargetingManager.setCTFactionTargets(window.getDatabaseNode());
+							elseif subselection == 5 then
+								TargetingManager.setCTFactionTargets(window.getDatabaseNode(), true);
+							end
+						end
+					end
+				</script>
+			</buttoncontrol>
+
+			<buttoncontrol name="targeting_clear_button">
+				<bounds>-20,2,20,20</bounds>
+				<icon normal="button_clear" pressed="button_clear_down" />
+				<tooltip textres="ct_tooltip_cleartarget" />
+				<script>
+					function onButtonPress()
+						TargetingManager.clearCTTargets(window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="ct_target">
+		<margins control="0,0,3,2" />
+		<script file="ct/scripts/ct_target.lua" />
+		<sheetdata>
+			<hs name="noderef">
+				<script>
+					function onValueChanged()
+						window.onRefChanged();
+					end
+				</script>
+			</hs>
+			
+			<tokencontrol name="token">
+				<bounds>3,2,20,20</bounds>
+				<empty>token_empty</empty>
+				<disable />
+				<tooltip nodelay="true" />
+				<script>
+					function onClickDown(button, x, y)
+						return true;
+					end
+					
+					function onClickRelease(button, x, y)
+						window.removeTarget();
+						return true;
+					end
+				</script>
+			</tokencontrol>
+		</sheetdata>
+	</windowclass>
+</root>

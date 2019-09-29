@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+
+ 	<string name="setup_character">CoC Character Creation</string>
+ 	<string name="setup_user_manual">Basic MoreCore Guide</string>
+ 	<string name="setup_video_links">MoreCore Video Links</string>
+ 	<string name="setup_morecore_themes">MoreCore Themes</string>
+ 	<string name="setup_morecore_extensions">MoreCore Extensions</string>
+ 	<string name="setup_morecore_games">MoreCore Games</string>
+	
+	<windowclass name="setup_step1">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<header_column name="header">
+				<static textres="setup_header_help" />
+				<center />
+			</header_column>
+			<stringc_column_full>
+				<static textres="setup_text_help" />
+			</stringc_column_full>
+			<button_setup_left_link>
+				<state textres="setup_button_manual" />
+				<url>https://www.fantasygrounds.com/filelibrary/FantasyGroundsUserManual.pdf</url>
+			</button_setup_left_link>
+			<button_setup_right_link>
+				<state textres="setup_button_wiki" />
+				<url>https://www.fantasygrounds.com/wiki/index.php/User_Guides</url>
+			</button_setup_right_link>
+			<button_setup_left_link>
+				<state textres="setup_button_forums" />
+				<url>https://www.fantasygrounds.com/forums/</url>
+			</button_setup_left_link>
+			<button_setup_right_link>
+				<state textres="setup_user_manual" />
+				<url>https://www.diehard-gaming.com/mchelp.html</url>
+			</button_setup_right_link>
+			<button_setup_left_link>
+				<state textres="setup_video_links" />
+				<url>https://youtu.be/Q8M48Pqb0BM</url>
+			</button_setup_left_link>
+			<button_setup_right_link>
+				<state textres="setup_morecore_themes" />
+				<url>https://www.fantasygrounds.com/forums/showthread.php?35056-MoreCore-Themes</url>
+			</button_setup_right_link>
+			<button_setup_left_link>
+				<state textres="setup_morecore_games" />
+				<url>https://www.fantasygrounds.com/forums/showthread.php?35156-MoreCore-City-Of-Mist-Starter-Set</url>
+			</button_setup_left_link>
+			<spacer_column />
+			<header_column name="header">
+				<static textres="setup_header_purchases" />
+				<center />
+			</header_column>
+			<stringc_column_full>
+				<static textres="setup_text_purchases" />
+			</stringc_column_full>
+			<spacer_column />
+		</sheetdata>
+	</windowclass>
+	
+
+	</root>

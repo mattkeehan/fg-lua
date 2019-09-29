@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="trackers">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="350" height="480" />
+		</placement>
+		<sizelimits>
+			<minimum width="350" height="400" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_item</minimize>
+		<tooltip field="name" />
+		<sharable />
+		<nodelete />
+		<script>
+			function onInit()
+				onLockChanged();
+				DB.addHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onClose()
+				DB.removeHandler(DB.getPath(getDatabaseNode(), "locked"), "onUpdate", onLockChanged);
+			end
+			function onLockChanged()
+				if header.subwindow then
+					header.subwindow.update();
+				end
+				if content.subwindow then
+					content.subwindow.update();
+				end
+			end
+		</script>
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>trackers_header</class>
+			</sub_record_header>
+
+			<frame_record_content name="contentframe" />
+
+			<subwindow_record name="content">
+				<class>trackers_stats</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>content</target>
+			</scrollbar_record>
+			
+			<resize_recordsheet />
+			<close_recordsheet />
+			<helper_mc_trackers />
+		</sheetdata>	
+	</windowclass>
+
+	<windowclass name="trackers_header">
+		<margins control="0,0,0,7" />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				name.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<link_record_header>
+				<class>trackers</class>
+			</link_record_header>
+
+			<string_record_name name="name">
+				<anchored>
+					<top offset="5"/>
+					<left offset="37" />
+					<right offset="-60" parent="" />
+				</anchored>
+				<empty textres="trackers_emptyname" />
+			</string_record_name>
+
+			<anchor_record_header_right name="rightanchor" />
+			<icon_record_locked />
+			<button_record_locked />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="trackers_stats">
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+				description.setReadOnly(bReadOnly);
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+			
+			<label_column>
+				<static textres="ref_label_number" />
+			</label_column>
+			<number_column name="number_trackers">
+				<default>5</default>
+			</number_column>						
+			<button_trackers_cycler name="trackers_icon" source="trackers_icon">
+				<anchored to="number_trackers" width="100" >
+					<top />
+					<left anchor="right" relation="relative" offset="30" />
+					</anchored>
+			</button_trackers_cycler>
+			
+			<line_column />
+			<ft_columnh name="description">
+				<separator>line_desc</separator>
+			</ft_columnh>
+			<line_column />
+				
+			<!-- ==== Parameter Configuration ==== -->
+			
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="masterindexitem_trackers">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/masterindexitem_window.lua" />
+		<sheetdata>
+			<masterindexitem_link name="link" />
+
+			<masterindexitem_anchor_right name="rightanchor" />
+			<masterindexitem_idelete name="idelete" />
+			<masterindexitem_access name="access" />
+			<masterindexitem_modified name="modified" />
+			<masterindexitem_category name="category" />
+			
+			<masterindexitem_name name="name"/>
+ 			<helper_mc_trackers />
+			</sheetdata>
+	</windowclass>
+</root>

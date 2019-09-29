@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+		<!-- Display Tabs for GM and Players -->
+	<template name="categories_all">
+		<categoryselectioncontrol>
+			<anchored>
+				<top anchor="bottom" offset="-39" />
+				<left offset="24" />
+				<bottom offset="-1" />
+			</anchored>
+		</categoryselectioncontrol>
+	</template>
+	
+	</root>
